@@ -1,6 +1,8 @@
-<div class="flex aspect-square size-8 items-center justify-center rounded-md bg-accent-content text-accent-foreground">
-    <x-app-logo-icon class="size-5 fill-current text-white dark:text-black" />
+<div class="flex aspect-square  items-center justify-center rounded-md text-accent-foreground">
+    {{-- <x-app-logo-icon class="size-5 fill-current text-white dark:text-black" /> --}}
+    <img src="{{ asset('images/logo_warna.png') }}" alt="logo" class="h-12">
 </div>
 <div class="ms-1 grid flex-1 text-start text-sm">
-    <span class="mb-0.5 truncate leading-none font-semibold">Laravel Starter Kit</span>
+    <span class="mb-0.5 truncate leading-none text-xs text-gray-500 mb-2">Aplikasi Komite Madrasah</span>
+    <span class="mb-0.5 truncate leading-none font-semibold">MAN 1 BLITAR</span>
 </div>

@@ -1,0 +1,162 @@
+/* GLOBAL CSS */
+
+.dataTable tbody td {
+    padding: 10px !important; 
+}
+
+.dataTable tbody tr:hover {
+    background-color: #e2e8f0a3 !important; /* Light gray for hover effect */
+    transition: background-color 0.3s ease !important; /* Smooth transition */
+}
+
+.dark .dataTable tbody tr:hover {
+    background-color: #4b5563 !important; /* Tailwind's gray-600 for dark mode hover */
+    transition: background-color 0.3s ease !important; /* Smooth transition */
+}
+
+.dataTable tbody tr:nth-child(odd) {
+    background-color: #ffffff; 
+}
+
+.dataTable tbody tr:nth-child(even) {
+    background-color: #f3f4f6; 
+}
+.dark .dataTable tbody tr:nth-child(odd) {
+    background-color: #1f293765; /* Tailwind's gray-800 */
+}
+
+.dark .dataTable tbody tr:nth-child(even) {
+    background-color: #37415166; /* Tailwind's gray-700 */
+}
+
+/* Styling for DataTable export buttons (Excel, Copy, PDF, Print) */
+.dt-buttons .dt-button:nth-child(1) {
+    background-color: #007bff !important; /* Primary blue */
+    color: white !important;
+}
+
+.dt-buttons .dt-button:nth-child(2) {
+    background-color: #28a745 !important; /* Green */
+    color: white !important;
+}
+
+.dt-buttons .dt-button:nth-child(3) {
+    background-color: #ffc107 !important; /* Yellow */
+    color: black !important;
+}
+
+.dt-buttons .dt-button:nth-child(4) {
+    background-color: #dc3545 !important; /* Red */
+    color: white !important;
+}
+
+.dt-buttons .dt-button:nth-child(5) {
+    background-color: #35addc !important; /* Red */
+    color: white !important;
+}
+
+.dt-buttons .dt-button {
+    border: none !important;
+    border-radius: 5px !important; /* Rounded corners */
+    padding: 5px 10px !important;
+    margin: 2px !important;
+    cursor: pointer !important;
+    font-size: 14px !important;
+    transition: background-color 0.3s ease !important;
+    background-image: none !important;
+}
+
+.dt-buttons .dt-button:hover {
+    background-color: #003369bf !important; /* Darker blue on hover */
+    color: white !important;
+    transform: scale(1.05); /* Slightly enlarge the button on hover */
+    transition: transform 0.2s ease, background-color 0.2s ease; /* Smooth transition */
+}
+
+.dt-buttons .dt-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    color: white !important;
+}
+
+.dt-length {
+    margin-left: 10px !important;
+}
+
+.dt-paging-button.current{
+    
+    color: white !important;
+
+    border-radius: 5px !important; /* Rounded corners */
+
+}
+
+/* Styling Pagination */
+.dataTables_wrapper .dataTables_paginate .paginate_button.current{
+    cursor: pointer;
+    padding: 5px 10px;
+    margin: 2px;
+    background: #007bff;
+    color: white !important;
+    border-radius: 5px;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button{
+    cursor: pointer;
+    padding: 5px 10px;
+    margin: 2px;
+    background: white;
+    color: gray !important;
+    border-radius: 5px;
+}
+
+
+
+/* Atur agar pagination tetap rata kanan */
+.dataTables_wrapper .dataTables_paginate {
+    float: right;
+}
+
+
+
+.dataTables_filter input {
+    padding-right: 10px !important;
+    border-radius: 5px !important;
+    border: 1px solid #ced4da !important;
+}
+
+.btn-secondary {
+    background-color: #007bff;
+}
+.dataTables_length select {
+    width:70px;
+    padding-left: 10px !important;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+}
+
+.dt-buttons {
+
+    float: right;
+}
+
+
+
+.addModal{
+    background-color: rgba(0, 0, 0, 0.5); 
+}
+
+
+
+#rekap-rab th {
+    min-width: 150px !important;
+    text-align: center !important;
+}
+
+#rekap-rab th:nth-child(1) {
+    min-width: 50px !important; /* Set the desired width for the second <th> */
+    text-align: center !important;
+}
+
+#rekap-rab th:nth-child(2) {
+    min-width: 250px !important; /* Set the desired width for the second <th> */
+    text-align: center !important;
+}

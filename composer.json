@@ -10,10 +10,31 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "barryvdh/laravel-dompdf": "^3.1",
+        "bpampuch/pdfmake": "^0.2.18",
+        "components/jquery": "^3.7",
+        "datatables.net/datatables.net-autofill-dt": "^2.7",
+        "datatables.net/datatables.net-buttons-dt": "^3.2",
+        "datatables.net/datatables.net-colreorder-dt": "^2.0",
+        "datatables.net/datatables.net-datetime": "^1.5",
+        "datatables.net/datatables.net-dt": "^2.2",
+        "datatables.net/datatables.net-fixedcolumns-dt": "^5.0",
+        "datatables.net/datatables.net-fixedheader-dt": "^4.0",
+        "datatables.net/datatables.net-keytable-dt": "^2.12",
+        "datatables.net/datatables.net-responsive-dt": "^3.0",
+        "datatables.net/datatables.net-rowgroup-dt": "^1.5",
+        "datatables.net/datatables.net-rowreorder-dt": "^1.5",
+        "datatables.net/datatables.net-scroller-dt": "^2.4",
+        "datatables.net/datatables.net-searchbuilder-dt": "^1.8",
+        "datatables.net/datatables.net-searchpanes-dt": "^2.3",
+        "datatables.net/datatables.net-select-dt": "^3.0",
+        "datatables.net/datatables.net-staterestore-dt": "^1.4",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
         "livewire/flux": "^2.1.1",
-        "livewire/volt": "^1.7.0"
+        "livewire/livewire": "^3.6",
+        "livewire/volt": "^1.7.0",
+        "stuk/jszip": "^3.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -29,7 +50,10 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "app/helper/format-rupiah.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
@@ -63,7 +87,8 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": ["laravel/dusk"]
+            
         }
     },
     "config": {

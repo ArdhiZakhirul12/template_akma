@@ -119,6 +119,46 @@
 
         {{ $slot }}
 
+        <script>
+            function initDataTables() {
+                $('.exampleTable').each(function () {
+                    if (!$.fn.DataTable.isDataTable(this)) {
+                        $(this).DataTable({
+                            destroy: true,
+                            dom: '<"flex mb-4 "<" "f> <""l> <"flex-grow"B>> t <"row py-4"<"col-md-6"i><"col-md-6 text-end"p>>',
+                            language: {
+                                search: "Cari: ",
+                                lengthMenu: "Show _MENU_ Data",
+                                info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+                                paginate: {
+                                    first: "Awal",
+                                    last: "Akhir",
+                                    next: "Next",
+                                    previous: "Previous"
+                                }
+                            },
+                            lengthMenu: [10, 25, 50, 100],
+                            pageLength: 10,
+                            order: [[0, 'desc']]
+                        });
+                    }
+                });
+            }
+        
+            document.addEventListener('DOMContentLoaded', function () {
+                
+                initDataTables(); // On first page load
+            });
+        
+            // Livewire hook: after every DOM update
+            Livewire.hook('message.processed', (message, component) => {
+                initDataTables(); // Re-init table when DOM is updated by Livewire
+            });
+        </script>
+        
+       
+        @livewireScripts
+
         @fluxScripts
     </body>
 </html>
