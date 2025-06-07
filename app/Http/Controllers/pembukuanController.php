@@ -223,9 +223,9 @@ class pembukuanController extends Controller
         return view('pages.pembukuan.index', compact('yearDate', 'monthdate', 'exYears', 'saldo_akhir_list', 'saldo_akhir_list_tahun', 'banks', 'bank_data_list', 'penerimaan', 'pengeluaran', 'saldoAwal'));
     }
 
-    public function listPembukuan()
+    public function listPembukuan($id,$inputYear,$inputMonth)
     {
-        return view('pages.pembukuan.list_printed');
+        return view('pages.pembukuan.list_printed',compact('id','inputYear','inputMonth'));
     }
 
 
