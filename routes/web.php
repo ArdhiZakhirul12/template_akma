@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\dashboardController;
+use App\Http\Controllers\incomeController;
 use App\Http\Controllers\kelasController;
 use App\Http\Controllers\pemasukanController;
 use App\Http\Controllers\pembukuanController;
@@ -27,7 +28,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', [dashboardController::class, 'index'])->name('dashboard');
     Route::group(['prefix' => 'pemasukan', 'as' => 'pemasukan.'], function () {
         Route::get('/', [pemasukanController::class, 'index'])->name('index');
-        Route::get('/livewire', [pemasukanController::class, 'indexLivewire'])->name('livewire');
+        Route::get('/income', [incomeController::class, 'incomeIndex'])->name('incomeIndex');
         Route::get('/calender/{id}', [pemasukanController::class, 'calender'])->name('calender');
         // Route::get('/create', [pemasukanController::class, 'create'])->name('create');
         Route::post('/store', [pemasukanController::class, 'store'])->name('store');

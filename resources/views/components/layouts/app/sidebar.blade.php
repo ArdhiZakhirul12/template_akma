@@ -18,7 +18,7 @@
                 <flux:navlist.group :heading="__('Platform')" class="grid bg-white dark:bg-zinc-900 rounded-lg p-3 shadow-sm">
                     <x-template.button-navbar color="text-blue-500" route="dashboard" icon="{{ asset('images/dashboard.svg') }}" title="Dashboard" />
                     <div class="h-4"></div>
-                    <x-template.button-navbar color="text-green-700" route="pemasukan.livewire" icon="{{ asset('images/income.svg') }}" title="Pemasukan" />
+                    <x-template.button-navbar color="text-green-700" route="pemasukan.incomeIndex" icon="{{ asset('images/income.svg') }}" title="Pemasukan" />
                     
                     <div class="h-4"></div>
                     <x-template.button-navbar color="text-yellow-500" route="pengeluaran.index" icon="{{ asset('images/spending.svg') }}" title="Pengeluaran" />

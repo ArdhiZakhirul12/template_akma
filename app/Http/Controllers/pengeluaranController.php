@@ -14,11 +14,11 @@ class pengeluaranController extends Controller
     //
     public function index(){
         // $pengeluarans = uraianKegiatan::with('subKategoriRab.kategori')->get();
-        $pengeluarans = pengeluaran::with('uraianKegiatan.subKategoriRab.kategori','bank')->get();
+        // $pengeluarans = pengeluaran::with('uraianKegiatan.subKategoriRab.kategori','bank')->get();
         // $subKategoriRabs= subKategoriRab::all();
         // dd($subKategoriRabs);
         // dd($pengeluarans);
-        return view('pages.pengeluaran.index', compact('pengeluarans'));
+        return view('pages.pengeluaran.index');
     }
 
     public function show($id){
