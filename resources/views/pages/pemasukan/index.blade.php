@@ -10,7 +10,7 @@
     </script>
     @endif
 
-    <livewire:pemasukan.pemasukan/>
+    <livewire:pemasukan.table-pemasukan/>
 
    
 
