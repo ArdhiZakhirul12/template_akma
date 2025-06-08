@@ -11,7 +11,7 @@ class TablePemasukan extends Component
 
     public $data_siswas;
     public $kelas;
-    public $pemasukans_data;
+    // public $pemasukans_data;
     public $siswas;
     public $openModal;
     public $openDropdown;
@@ -34,7 +34,7 @@ class TablePemasukan extends Component
         $this->openDropdown = false;
         $this->selectedSiswaInfo = '';
         $this->siswaId = '';
-        $this->pemasukans_data = pemasukan::with('siswa')->get();
+        // $this->pemasukans_data = pemasukan::with('siswa')->get();
         // $this->search = '';
         // $this->jumlah = '';
 
