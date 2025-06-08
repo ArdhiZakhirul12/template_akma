@@ -22,7 +22,7 @@ class Pemasukan extends Component
 
     public function mount()
     {
-        $this->pemasukans_data = ModelsPemasukan::with('siswa')->get();
+        
         $this->siswas = siswa::with('kelas')->get();
         $this->data_siswas = siswa::whereHas('kelas', function ($query) {
             $query->where('tingkatan', "10");
@@ -34,6 +34,7 @@ class Pemasukan extends Component
         $this->openDropdown = false;
         $this->selectedSiswaInfo = '';
         $this->siswaId = '';
+        $this->pemasukans_data = ModelsPemasukan::with('siswa')->get();
         // $this->search = '';
         // $this->jumlah = '';
 
