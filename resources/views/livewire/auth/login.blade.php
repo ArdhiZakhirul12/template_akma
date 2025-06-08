@@ -74,7 +74,7 @@ new #[Layout('components.layouts.auth')] class extends Component {
 }; ?>
 
 <div class="flex flex-col gap-6 ">
-    <x-auth-header :title="__('KOMITE MAN 1 BLITAR')" :description="__('Masukkan email dan password anda di bawah ini')" />
+    <x-auth-header :title="__('APLIKASI KOMITE SEKOLAH')" :description="__('Masukkan email dan password anda di bawah ini')" />
 
     <!-- Session Status -->
     <x-auth-session-status class="text-center" :status="session('status')" />

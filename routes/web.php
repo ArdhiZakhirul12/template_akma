@@ -84,7 +84,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             pembukuanController::class,
             'index'
         ])->name('index');
-        Route::get('/list', [pembukuanController::class, 'listPembukuan'])->name('listPembukuan');
+        Route::get('/list/{id}/{inputYear}/{inputMonth}', [pembukuanController::class, 'listPembukuan'])->name('listPembukuan');
         Route::get('/pdf_printed', [pembukuanController::class, 'cetak_pdf'])->name('cetak_pdf');
     });
 
