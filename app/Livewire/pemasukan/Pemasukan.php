@@ -11,7 +11,7 @@ class Pemasukan extends Component
 
     public $data_siswas;
     public $kelas;
-    public $pemasukans;
+    public $pemasukans_data;
     public $siswas;
     public $openModal;
     public $openDropdown;
@@ -22,7 +22,7 @@ class Pemasukan extends Component
 
     public function mount()
     {
-        $this->pemasukans = ModelsPemasukan::with('siswa')->get();
+        $this->pemasukans_data = ModelsPemasukan::with('siswa')->get();
         $this->siswas = siswa::with('kelas')->get();
         $this->data_siswas = siswa::whereHas('kelas', function ($query) {
             $query->where('tingkatan', "10");
