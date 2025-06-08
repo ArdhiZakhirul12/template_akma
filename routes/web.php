@@ -27,6 +27,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', [dashboardController::class, 'index'])->name('dashboard');
     Route::group(['prefix' => 'pemasukan', 'as' => 'pemasukan.'], function () {
         Route::get('/', [pemasukanController::class, 'index'])->name('index');
+        Route::get('/livewire', [pemasukanController::class, 'indexLivewire'])->name('livewire');
         Route::get('/calender/{id}', [pemasukanController::class, 'calender'])->name('calender');
         // Route::get('/create', [pemasukanController::class, 'create'])->name('create');
         Route::post('/store', [pemasukanController::class, 'store'])->name('store');

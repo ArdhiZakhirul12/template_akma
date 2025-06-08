@@ -23,6 +23,12 @@ class pemasukanController extends Controller
         return view('pages.pemasukan.index', compact('pemasukans', 'siswas'));
     }
 
+    public function indexLivewire()
+    {
+
+        return view('pages.pemasukan.table_pemasukan');
+    }
+
     public function show($id)
     {
         $pemasukan = pemasukan::with('siswa.kelas')->findOrFail($id);
