@@ -219,14 +219,13 @@
     
     
         <div id="struk_pembayaran" class="hidden" style="width: 210mm; height: 297mm; margin: 0 auto;">
-            <div class="flex justify-between items-center py-4 px-9 mx-5"
-                style="font-family: 'Times New Roman', Times, serif;">
-                <img src="{{ asset('images/logo_warna.png') }}" alt="logo man" class="w-25 h-25">
+            <div class="flex justify-between items-center py-4 px-9 mx-5">
+                <img src="{{ asset('images/akse.png') }}" alt="logo man" class="w-25 h-25">
                 <div class="justify-center items-center text-align-center text-center mr-9 pr-9">
-                    <h1 class="text-xl font-bold">KOMITE MADRASAH ALIYAH NEGERI TLOGO</h1>
-                    <h1 class="text-xl font-bold">KECAMATAN KANIGORO KABUPATEN BLITAR</h1>
-                    <h1>Jl. Raya Gaprang PO BOX 113 No. 32 Kanigoro Blitar</h1>
-                    <h1>No. Telp (0332)804047</h1>
+                    <h1 class="text-xl font-bold">KOMITE MADRASAH/SEKOLAH NEGERI</h1>
+                    <h1 class="text-xl font-bold">KECAMATAN ..... KOTA/KABUPATEN ....</h1>
+                    <h1>Jl. .... Alamat lengkap sekolah</h1>
+                    <h1>No. Telp (0332)80xxxxx</h1>
                 </div>
             </div>
             <div class="h-2 bg-gray-900 mb-4">

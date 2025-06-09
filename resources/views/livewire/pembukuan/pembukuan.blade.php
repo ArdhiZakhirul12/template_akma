@@ -266,12 +266,12 @@
     <div id="printPembukuan" class="hidden">
         <div style="font-family: 'Times New Roman', Times, serif;">
             <div class="flex justify-between items-center py-4 px-9 mx-5">
-                <img src="{{ asset('images/logo_warna.png') }}" alt="logo man" class="w-25 h-25">
+                <img src="{{ asset('images/akse.png') }}" alt="logo man" class="w-25 h-25">
                 <div class="justify-center items-center text-align-center text-center mr-9 pr-9">
-                    <h1 class="text-xl font-bold">KOMITE MADRASAH ALIYAH NEGERI TLOGO</h1>
-                    <h1 class="text-xl font-bold">KECAMATAN KANIGORO KABUPATEN BLITAR</h1>
-                    <h1>Jl. Raya Gaprang PO BOX 113 No. 32 Kanigoro Blitar</h1>
-                    <h1>No. Telp (0332)804047</h1>
+                    <h1 class="text-xl font-bold">KOMITE MADRASAH/SEKOLAH NEGERI</h1>
+                    <h1 class="text-xl font-bold">KECAMATAN ..... KOTA/KABUPATEN ....</h1>
+                    <h1>Jl. .... Alamat lengkap sekolah</h1>
+                    <h1>No. Telp (0332)80xxxxx</h1>
                 </div>
             </div>
             <div class="h-2 bg-gray-900 mb-4">
@@ -284,7 +284,7 @@
                     <h1 class="font-bold">BUKU KAS {{ strtoupper($bankName) }}</h1>
                 @endif
 
-                <h1 class="font-bold">KOMITE MAN 1 KABUPATEN BLITAR TAHUN AJARAN
+                <h1 class="font-bold">KOMITE MADRASAH/SEKOLAH TAHUN AJARAN
                     {{ $selectedYear - 1 }}/{{ $selectedYear }}</h1>
 
                 @if ($selectedMonth != 'semua bulan')
@@ -501,7 +501,7 @@
                 </table>
             @endif
         </div>
-        <h1 class="text-left my-2 ">Pada hari ini .......... Buku Kas Umum MAN 1 Blitar Tahun Ajaran 2024/2025 </h1>
+        <h1 class="text-left my-2 ">Pada hari ini .......... Buku Kas Umum Tahun Ajaran 2024/2025 </h1>
         <h1 class="text-left mb-2">ditutup dalam keadaan sebagai berikut.</h1>
 
         <table class="text-sm text-left text-gray-500 dark:text-gray-400 border border-gray-300">
@@ -582,14 +582,14 @@
                 <h1 class="  mb-8">KETUA</h1>
                 <div class="py-7"></div>
 
-                <h1 class="">H. IMRON ROSADY</h1>
+                <h1 class="">NAMA LENGKAP</h1>
             </div>
             <div class="text-center">
-                <h1 class="">BLITAR, _______________</h1>
+                <h1 class="">KOTA/KABUPATEN, _______________</h1>
                 <h1 class="  mb-8">BENDAHARA</h1>
                 <div class="py-7"></div>
 
-                <h1 class="">PRAPTI MAHMUDAH</h1>
+                <h1 class="">NAMA LENGKAP</h1>
             </div>
         </div>
 
