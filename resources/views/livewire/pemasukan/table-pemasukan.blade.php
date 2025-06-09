@@ -32,7 +32,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($pemasukans_data as $item)
+                    @foreach ($this->pemasukans_data as $item)
                         <tr
                             class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
                             <td style="text-align: center !important">{{ $item->id }}</td>
@@ -62,7 +62,7 @@
             </table>
         </div>
         {{-- If your happiness depends on money, you will never be happy with yourself. --}}
-        @if ($openModal)
+        @if ($this->openModal)
             <div id="add-pemasukan-modal" onclick="if (event.target === this) closeModal()"
                 class="addModal fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30">
                 <div id="modal-pemasukan-form"
