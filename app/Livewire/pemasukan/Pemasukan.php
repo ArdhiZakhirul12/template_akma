@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\pemasukan;
+namespace App\Livewire\Pemasukan;
 
 use App\Models\pemasukan as ModelsPemasukan;
 use App\Models\siswa;
