@@ -1,10 +1,6 @@
 <div>
     <div class="sm:flex sm:justify-between sm:items-center mb-6">
-        <h1 class="text-3xl font-bold mb-2">Kalender Pemasukan</h1>
-
-    </div>
-
-    <div class="p-5 bg-white dark:bg-zinc-700 rounded-lg shadow-md overflow-auto">
+        <h1 class="text-3xl font-bold mb-2">Kalender Pemasukan {{ $jenisPemasukan == "umum" ? 'Sekolah' : ' Mahad' }}</h1>
         <div class="flex items-center justify-between mb-4">
             <div>
                 <label for="kelas" class="text-sm font-medium text-gray-700 dark:text-gray-200">Pilih Kelas:</label>
@@ -17,6 +13,10 @@
                 </select>
             </div>
         </div>
+    </div>
+
+    <div class="p-5 bg-white dark:bg-zinc-700 rounded-lg shadow-md overflow-auto">
+       
 
         <table class="dataTableClass w-full text-sm text-left text-gray-500 dark:text-gray-400" style="width:100%">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -42,7 +42,11 @@
                             class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
                             <td class="text-center">{{ $loop->iteration }}</td>
                             <td class="px-3 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ $siswa['nama'] }}
+                                <div>{{ $siswa['nama'] }}</div>
+                                <div class="flex">
+                                    <div class="text-xs text-gray-400">Total Kurang :</div>
+                                    <div class="text-xs text-amber-500  ">{{ toRupiah($siswa['total_kurang'])  }}</div>
+                                </div>
                             </td>
                             <td class="text-center">{{ $siswa['kelas'] }}</td>
                             <td class="text-center">{{ $siswa['no_ortu'] }}</td>

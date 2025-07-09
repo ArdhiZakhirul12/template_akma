@@ -16,4 +16,7 @@ class pengeluaran extends Model
     {
         return $this->belongsTo(bank::class,'jenis_id');
     }
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

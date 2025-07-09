@@ -16,6 +16,7 @@
                 @csrf
                 <div class="space-y-4">
                     <input type="text" name="kategori" placeholder="Nama" class="w-full border rounded px-3 py-2" />
+                    <input type="text" name="jenis_rab" class="hidden" value="umum" />
                     <!-- Bisa tambah field sebanyak yang kamu mau -->
                 </div>
                 <div class="mt-6 text-right">
@@ -75,7 +76,7 @@
         <h1 class="text-3xl font-bold mb-2">Rencana Anggaran Belanja</h1>
 
         <div class="flex">
-            <x-template.button-with-icon title="Rekap RAB" color="blue" onclick="location.href='{{ route('rab.showRekap', ['id' => 'all']) }}'"
+            <x-template.button-with-icon title="Rekap RAB" color="fuchsia" onclick="location.href='{{ route('rab.showRekap', ['id' => 'all']) }}'"
                 icon="<path fill='currentColor' d='M6 2H14C15.1 2 16 2.9 16 4V16C16 17.1 15.1 18 14 18H6C4.9 18 4 17.1 4 16V4C4 2.9 4.9 2 6 2ZM6 0C3.79 0 2 1.79 2 4V16C2 18.21 3.79 20 6 20H14C16.21 20 18 18.21 18 16V4C18 1.79 16.21 0 14 0H6ZM8 6H12V8H8V6ZM8 10H12V12H8V10ZM8 14H12V16H8V14Z'/>" />
             <div class="mx-2"></div>
             <div class="relative">
@@ -111,7 +112,7 @@
         </div>
     </div>
 
-    <div class="sm:flex sm:justify-between sm:items-center my-4">
+    {{-- <div class="sm:flex sm:justify-between sm:items-center my-4">
         <h1 class="text-3xl font-bold mb-2">Daftar Bank</h1>
 
 
@@ -200,7 +201,7 @@
                 </div>
             </form>
         </div>
-    </div>
+    </div> --}}
     <script>
         $(document).on('click', '.btn-edit-bank', function() {
             var row = $(this).closest('tr');

@@ -24,9 +24,12 @@ class Pengeluaran extends Component
 
     public function mount()
     {
-        $this->pengeluarans = ModelsPengeluaran::with('uraianKegiatan.subKategoriRab.kategori','bank')->get();
+        $this->pengeluarans = ModelsPengeluaran::with('uraianKegiatan.subKategoriRab.kategori', 'bank')->whereHas('bank', function ($query) {
+            $query->where('jenis', '!=', 'MAHAD');
+        })
+        ->get();
         $this->openModal = false;
-        $this->kategoriList = kategoriRab::all(); // load all categories at start
+        $this->kategoriList = kategoriRab::where("jenis_rab" ,'!=','mahad')->get(); // load all categories at start
         $this->subKategoriList = []; // initialize subcategories
         $this->uraianKegiatanList = []; // initialize activities
         $this->bankList = bank::all();

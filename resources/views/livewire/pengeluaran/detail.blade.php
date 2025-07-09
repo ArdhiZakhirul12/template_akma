@@ -5,67 +5,29 @@
     {{-- Because she competes with no one, no one can compete with her. --}}
     <div class="sm:flex sm:justify-between sm:items-center mb-6">
         <h1 class="text-3xl font-bold mb-2">Detail Pengeluaran</h1>
-        <button wire:click="openedModalForm"
-            class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block me-1" viewBox="0 0 20 20"
-                fill="currentColor">
-                <path
-                    d="M17.414 2.586a2 2 0 010 2.828l-10 10a2 2 0 01-.878.516l-4 1a1 1 0 01-1.265-1.265l1-4a2 2 0 01.516-.878l10-10a2 2 0 012.828 0zm-3.707 3.707L5 15l-.707-.707 8.707-8.707.707.707z" />
-            </svg>
-            Edit Data
-        </button>
+        <div>
+            <button onclick="printDiv('struk_pembayaran')"
+                class="focus:outline-none text-white bg-green-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block me-1" viewBox="0 0 20 20"
+                    fill="currentColor">
+                    <path
+                        d="M6 2a1 1 0 00-1 1v3h10V3a1 1 0 00-1-1H6zM4 6V3a3 3 0 013-3h6a3 3 0 013 3v3h1a2 2 0 012 2v7a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h1zm0 2H3v7h14V8h-1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V8zm2 0v2h8V8H6z" />
+                </svg>
+                Cetak Kuitansi
+            </button>
+            <button wire:click="openedModalForm"
+                class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block me-1" viewBox="0 0 20 20"
+                    fill="currentColor">
+                    <path
+                        d="M17.414 2.586a2 2 0 010 2.828l-10 10a2 2 0 01-.878.516l-4 1a1 1 0 01-1.265-1.265l1-4a2 2 0 01.516-.878l10-10a2 2 0 012.828 0zm-3.707 3.707L5 15l-.707-.707 8.707-8.707.707.707z" />
+                </svg>
+                Edit Data
+            </button>
+        </div>
     </div>
 
 
-
-    {{-- <div class="flex items-ceter p-5 bg-white dark:bg-zinc-700 rounded-lg shadow-md mb-4">
-        <div class="grid auto-rows-min gap-4 md:grid-cols-4 w-full">
-            <div class="border p-4 rounded-lg shadow-md">
-                <div class="flex items-start">
-                    <img src="{{ asset('images/income.svg') }}" alt="Saldo Akhir" class="w-7 object-cover mr-2">
-                    <div>
-                        <h1 class="text-l font-bold mb-2">DPP</h1>
-                        <p class="text-l text-gray-500 dark:text-gray-400">Rp. 200000</p>
-                    </div>
-                </div>
-
-            </div>
-
-
-            <div class="border p-4 rounded-lg shadow-md">
-                <div class="flex items-start">
-                    <img src="{{ asset('images/income.svg') }}" alt="Saldo Akhir" class="w-7 object-cover mr-2">
-                    <div>
-                        <h1 class="text-l font-bold mb-2">Tabungan</h1>
-                        <p class="text-l text-gray-500 dark:text-gray-400">Rp. 200000</p>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="border p-4 rounded-lg shadow-md">
-                <div class="flex items-start">
-                    <img src="{{ asset('images/dad.svg') }}" alt="Saldo Akhir" class="w-7 object-cover mr-2">
-                    <div>
-                        <h1 class="text-l font-bold mb-2">SPP</h1>
-                        <p class="text-l text-gray-500 dark:text-gray-400">Rp. 200000</p>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="border p-4 rounded-lg shadow-md">
-                <div class="flex items-start">
-                    <img src="{{ asset('images/dad.svg') }}" alt="Saldo Akhir" class="w-7 object-cover mr-2">
-                    <div>
-                        <h1 class="text-l font-bold mb-2">Total</h1>
-                        <p class="text-l text-gray-500 dark:text-gray-400">{{ $pengeluaran->jumlah }}</p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div> --}}
 
 
     <div class="grid auto-rows-min gap-4 md:grid-cols-2 w-full items-start">
@@ -109,6 +71,12 @@
                             </tr>
                             <tr>
                                 <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    Teller</td>
+                                <td class="px-4 py-2 text-gray-500 dark:text-gray-400">{{ $pengeluaran->user->name}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     Tanggal</td>
                                 <td class="px-4 py-2 text-gray-500 dark:text-gray-400">
                                     {{ \Carbon\Carbon::parse($pengeluaran->tanggal)->translatedFormat('d M Y') }}</td>
@@ -141,11 +109,12 @@
             <div class="p-5 bg-white dark:bg-zinc-700 rounded-lg shadow-md">
 
                 <div class="border p-4 rounded-lg">
-                    <div class="flex items-start mb-4" >
+                    <div class="flex items-start mb-4">
                         <img src="{{ asset('images/saldoakhir.svg') }}" alt="Saldo Akhir" class="w-7 object-cover mr-2">
                         <div>
                             <h1 class="text-l font-bold mb-2">Dokumen</h1>
-                            <img wire:click="openImageSpending" src="{{ asset('storage/' . $pengeluaran->dokumen) }}" alt="Dokumen"
+                            <img wire:click="openImageSpending" src="{{ asset('storage/' . $pengeluaran->dokumen) }}"
+                                alt="Dokumen"
                                 class="w-32 h-32 object-cover cursor-pointer rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                         </div>
                     </div>
@@ -158,11 +127,11 @@
 
     </div>
     @if ($openImage)
-        <div id="open-image" onclick="if (event.target === this) @this.closeImageSpending()" 
-        class="addModal fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30">
+        <div id="open-image" onclick="if (event.target === this) @this.closeImageSpending()"
+            class="addModal fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30">
             <div class="bg-white dark:bg-zinc-700 rounded-lg shadow-md p-4 ">
                 <img src="{{ asset('storage/' . $pengeluaran->dokumen) }}" alt="Dokumen"
-                     class="max-w-200 max-h-120 object-cover">
+                    class="max-w-200 max-h-120 object-cover">
                 <button wire:click="closeImageSpending"
                     class="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Tutup</button>
             </div>
@@ -171,10 +140,21 @@
 
 
     @if ($openModal)
-        <div id="add-pemasukan-modal" onclick="if (event.target === this) closeModal()"
+        <div id="add-pemasukan-modal" onclick="if (event.target === this) @this.closeModalForm()"
             class="addModal fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30">
-            <div class="p-4 bg-white dark:bg-zinc-700 rounded-lg shadow-md w-full max-w-2xl">
-                <h1 class="text-xl font-bold mb-4">Edit Pengeluaran Data</h1>
+            <div class="p-8 bg-white dark:bg-zinc-700 rounded-lg shadow-md w-full max-w-2xl">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-bold">Edit Pengeluaran</h2>
+                    <button wire:click="closeModalForm"
+                        class="text-gray-500 hover:text-gray-700 focus:outline-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+
+                </div>
                 <form action="{{ route('pengeluaran.update', $pengeluaran->id) }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
@@ -245,12 +225,19 @@
                                 value="{{ number_format($pengeluaran->jumlah, 0, ',', '.') }}"
                                 class="w-full border rounded px-3 py-2" oninput="formatRupiah(this)" required />
                         </div>
-                        <div class="mb-4 w-1/2">
-                            <label for="keterangan" class="block text-sm font-medium text-gray-400">Keterangan</label>
-                            <input type="text" name="keterangan" id="keterangan"
-                                value="{{ $pengeluaran->keterangan }}"
+                        <div class="mb-4 w-1/2 mr-2">
+                            <label for="tanggal_pengeluaran" class="block text-sm font-medium text-gray-400">Tanggal</label>
+                            <input type="date" name="tanggal_pengeluaran" id="tanggal_pengeluaran" placeholder="Masukkan tanggal" value="{{ $pengeluaran->tanggal_pengeluaran }}"
                                 class="mt-1 p-2 w-full border border-gray-300 rounded" required>
                         </div>
+                       
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="keterangan" class="block text-sm font-medium text-gray-400">Keterangan</label>
+                        <input type="text" name="keterangan" id="keterangan"
+                            value="{{ $pengeluaran->keterangan }}"
+                            class="mt-1 p-2 w-full border border-gray-300 rounded" required>
                     </div>
 
                     <div class="flex items-center w-full justify-between">
@@ -263,13 +250,13 @@
                         </div>
 
                         <div class="flex items-center">
-                            <div class="flex justify-end mr-2">
+                            {{-- <div class="flex justify-end mr-2">
                                 <button onclick="closeModal()"
                                     class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Kembali</button>
-                            </div>
+                            </div> --}}
                             <div class="flex justify-end">
                                 <button type="submit"
-                                    class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Simpan</button>
+                                    class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">Simpan</button>
                             </div>
                         </div>
 
@@ -280,6 +267,98 @@
             </div>
         </div>
     @endif
+
+    <div id="struk_pembayaran" class="hidden fixed inset-0 z-50 items-center justify-center bg-black bg-opacity-50">
+        <div class="flex justify-between items-center py-4"
+            style="font-family: 'Times New Roman', Times, serif;">
+            <img src="{{ asset('images/logo_warna.png') }}" alt="logo man" class="w-20 h-20">
+            <div class="justify-center items-center text-align-center text-center mr-9 pr-9">
+                <h1 class="text-l font-bold">KOMITE MADRASAH ALIYAH NEGERI TLOGO</h1>
+                <h1 class="text-l font-bold">KECAMATAN KANIGORO KABUPATEN BLITAR</h1>
+                <h1>Jl. Raya Gaprang PO BOX 113 No. 32 Kanigoro Blitar</h1>
+                <h1>No. Telp (0332)804047</h1>
+            </div>
+        </div>
+        <div class="h-2 bg-gray-900 mb-4">
+            <hr>
+        </div>
+        <div style="font-family: 'Times New Roman', Times, serif;">
+            <h1 class="text-center font-bold">KWITANSI / BUKTI PEMBAYARAN</h1>
+            <div class="h-1 bg-gray-500 my-2">
+                <hr>
+            </div>
+
+            <div class="flex items-center justify-center w-full">
+                <table class="mx-6 w-full">
+                    <tbody class="w-full">
+                        <tr>
+                            <td class="px-4 text-left text-sm">Sudah terima dari</td>
+                            <td class="px-4 text-left">:</td>
+                            <td colspan="2" class="min-w-[200px] text-left px-4 font-bold text-gray-900 dark:text-white border border-gray-300" id="nama_penerima_print">KOMITE MAN 1 BLITAR</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 text-left">Jumlah Uang</td>
+                            <td class="px-4 text-left">:</td>
+                            <td colspan="2" class="min-w-[200px] text-left px-4 font-bold text-gray-900 dark:text-white border border-gray-300" id="nama_penerima_print">{{ toRupiah($pengeluaran->jumlah) }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 text-left">Terbilang</td>
+                            <td class="px-4 text-left">:</td>
+                            <td colspan="2" class="min-w-[200px] text-left px-4 font-bold text-gray-900 dark:text-white border border-gray-300" id="nama_penerima_print">{{ toTerbilang($pengeluaran->jumlah) }}</td>
+                        
+                        </tr>
+                        <tr>
+                            <td class="px-4 text-left">Untuk Pembayaran</td>
+                            <td class="px-4 text-left">:</td>
+                            <td colspan="2" class="min-w-[200px] text-left px-4 font-bold text-gray-900 dark:text-white border border-gray-300" id="nama_penerima_print">{{ $pengeluaran->uraianKegiatan->uraian_kegiatan }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 text-left"></td>
+                            <td class="px-4 text-left"></td>
+                            <td class="px-4 text-right">Jumlah</td>
+                            <td class="min-w-[100px] text-left px-4 font-bold text-gray-900 dark:text-white border border-gray-300" id="nama_penerima_print">dd</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="flex justify-between mt-3 px-8 py-4">
+                <div class="text-center">
+                    <h1 class="text-lg"></h1>
+                    <h1 class="text-lg  mb-8"></h1>
+                    <div class="py-7"></div>
+
+                    <h1 class="text-lg"></h1>
+                </div>
+                <div class="">
+                    <h1 class="">BLITAR, _______________</h1>
+                    <h1 class="">Penerima</h1>
+                    <div class="py-7"></div>
+
+                    <h1 class="text-lg">___________________</h1>
+                </div>
+            </div>
+            
+            <div class="flex justify-between  mt-2 px-8 py-2">
+                <div class="">
+                    <h1 class="">Setuju dibayar</h1>
+                    <h1 class="  mb-8">Ketua</h1>
+                    <div class="py-7"></div>
+
+                    <h1 class="font-bold underline">H. IMRON ROSADY</h1>
+                </div>
+                <div class="">
+                    <h1 class="">Lunas dibayar</h1>
+                    <h1 class="  mb-8">Bendahara</h1>
+                    <div class="py-7"></div>
+
+                    <h1 class="font-bold underline">PRAPTI MAHMUDAH</h1>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 
     <script>
         function closeModal() {
@@ -300,6 +379,47 @@
             let formatted = reverse.match(/\d{1,3}/g).join('.').split('').reverse().join('');
             // formatted = formatted;
             angka.value = formatted;
+        }
+
+        function printDiv(divId) {
+
+            let printContent = document.getElementById(divId).innerHTML;
+            let originalContent = document.body.innerHTML;
+            // Create a hidden print-only container
+            let printArea = document.createElement("div");
+            printArea.id = "print-area";
+            printArea.innerHTML = printContent;
+            document.body.appendChild(printArea);
+
+            // Add print styles to hide everything else
+            let style = document.createElement("style");
+            style.innerHTML = `
+@media print {
+body * { visibility: hidden; }
+#print-area, #print-area * { visibility: visible; }
+#print-area {
+position: absolute;
+top: 0;
+
+width: 100%; /* Adjust width as needed */
+
+margin: 0;
+padding: 0;
+text-align: center; /* Ensure text is centered */
+}
+}
+`;
+            document.head.appendChild(style);
+
+            // Trigger print
+            window.print();
+
+            // Cleanup after printing
+            setTimeout(() => {
+                document.body.removeChild(printArea);
+                document.head.removeChild(style);
+                window.livewire.emit('refreshComponent'); // Refresh Livewire component
+            }, 500); // Mengembalikan halaman ke tampilan awal
         }
     </script>
 

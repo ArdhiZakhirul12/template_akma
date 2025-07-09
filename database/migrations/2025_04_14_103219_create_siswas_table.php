@@ -20,7 +20,10 @@ return new class extends Migration
             $table->string('nama_ibu')->nullable();            
             $table->string('no_hp_wali')->nullable();            
             $table->string('nis')->nullable();
+            $table->longText('alamat')->nullable();
             $table->string('image')->nullable();
+            $table->boolean('anak_mahad')->default(false);
+            $table->date('tanggal_masuk');
             $table->unsignedBigInteger('kelas_id')->nullable();
             $table->foreign('kelas_id')->references('id')->on('kelas')->onDelete('cascade');
             $table->timestamps();

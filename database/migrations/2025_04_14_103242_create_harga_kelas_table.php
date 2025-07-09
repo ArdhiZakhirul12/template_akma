@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('tingkatan');
             $table->integer('jumlah');
+            $table->integer('target_dpp');
             $table->timestamps();
         });
     }

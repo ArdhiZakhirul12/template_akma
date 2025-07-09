@@ -28,5 +28,10 @@ class BanksSeeder extends Seeder
             'saldo' => 0,
             'presentase' => 40
         ]);
+        bank::create([
+            'jenis' => 'MAHAD',
+            'saldo' => 0,
+            'presentase' => 0
+        ]);
     }
 }

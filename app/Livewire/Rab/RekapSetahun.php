@@ -22,11 +22,14 @@ class RekapSetahun extends Component
     public $allKategori;
     public function mount($id)
     {
-        $this->allKategori = kategoriRab::all()->pluck('kategori')->toArray();
+        $this->allKategori = kategoriRab::where('jenis_rab','umum')->get()->pluck('kategori')->toArray();
    
         if ($id === 'all') {
             $this->selectedSubKategori = 'all';
             $get_uraians = uraianKegiatan::with("subKategoriRab.kategori")->get();
+            $get_uraians = $get_uraians->filter(function ($uraian) {
+                return $uraian->subKategoriRab->kategori->jenis_rab != 'mahad';
+            });
             $this->uraians =  $get_uraians->groupBy(function ($item) {
                 return $item->subKategoriRab->sub_kategori ?? 'Tanpa SubKategori';
             })->all();
@@ -39,6 +42,9 @@ class RekapSetahun extends Component
                     });
                 })
                 ->get();
+                $get_uraians = $get_uraians->filter(function ($uraian) {
+                    return $uraian->subKategoriRab->kategori->jenis_rab != 'mahad';
+                });
 
             $this->uraians = $get_uraians->groupBy(function ($item) {
                 return $item->subKategoriRab->sub_kategori ?? 'Tanpa SubKategori';
@@ -53,7 +59,7 @@ class RekapSetahun extends Component
         
  
         $this->pengeluarans = pengeluaran::all()->toArray();
-        
+        $monthlySums = [];
         foreach ($this->uraians as $subKategori => $uraians) {
             foreach ($uraians as $uraian) {
             $uraianId = $uraian->id;
@@ -69,6 +75,7 @@ class RekapSetahun extends Component
         }
 
         $this->monthlySums = $monthlySums;
+
      
 
         foreach ($this->monthlySums as $uraianId => $sums) {

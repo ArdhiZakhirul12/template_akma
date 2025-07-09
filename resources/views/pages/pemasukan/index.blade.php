@@ -9,9 +9,8 @@
       }, 3000);
     </script>
     @endif
+    
+    <livewire:pemasukan.pemasukan/>
 
-    <livewire:pemasukan.table-pemasukan/>
-
-   
 
 </x-layouts.app>

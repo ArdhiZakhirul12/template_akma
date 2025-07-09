@@ -23,6 +23,7 @@ class Detail extends Component
     public $dpp;
     public $tabungan;
     public $banks;
+    public $totalBayar;
     // public $jumlah;
 
     public function mount($id)
@@ -34,6 +35,8 @@ class Detail extends Component
         $this->spp = bank::find(3);
         $this->dpp = bank::find(1);
         $this->tabungan = bank::find(2);
+        $this->totalBayar = (int) $this->pemasukan->jumlah + (int) $this->pemasukan->spp + (int) $this->pemasukan->tabungan + (int) $this->pemasukan->dpp + (int) $this->pemasukan->mahad;
+
         // dd($this->spp, $this->dpp, $this->tabungan);
         $this->data_siswas = siswa::whereHas('kelas', function ($query) {
             $query->where('tingkatan', "10");

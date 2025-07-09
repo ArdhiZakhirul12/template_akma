@@ -50,7 +50,7 @@
 
             </tbody>
             <div id="myModal"
-                class="addModal fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+                class="addModal fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50" onclick="if (event.target === this) closeModal()">
                 <!-- Modal Content -->
                 <div class="bg-white dark:bg-zinc-800 max-h-[80vh] overflow-y-auto rounded-lg p-6 w-full max-w-md">
                     <div class="flex justify-between items-center mb-4">
@@ -67,38 +67,38 @@
                             <label for="uraian_kegiatan" class="text-sm font-medium text-gray-700 dark:text-white">Nama
                                 Kegiatan</label>
                             <input type="text" name="uraian_kegiatan" id="edit-kegiatan"
-                                class="w-full border rounded px-3 py-2" />
+                                class="w-full border rounded px-3 py-2" placeholder="Masukkan nama kegiatan" />
 
                             <div class="flex items-center w-full">
                                 <div>
                                     <label for="volume"
                                         class="text-sm font-medium text-gray-700 dark:text-white">Volume</label>
                                     <input type="number" name="volume" id="edit-maksimal"
-                                        class="w-full border rounded px-3 py-2" />
+                                        class="w-full border rounded px-3 py-2" placeholder="Masukkan volume" />
                                 </div>
                                 <div class="mx-2"></div>
                                 <div>
                                     <label for="satuan"
                                         class="text-sm font-medium text-gray-700 dark:text-white">Satuan</label>
                                     <input type="text" name="satuan" id="edit-satuan"
-                                        class="w-full border rounded px-3 py-2" />
+                                        class="w-full border rounded px-3 py-2" placeholder="Masukkan satuan" />
                                 </div>
                             </div>
 
                             <label for="biaya_satuan" class="text-sm font-medium text-gray-700 dark:text-white">Biaya
                                 Satuan</label>
                             <input type="text" name="biaya_satuan" id="edit-maksimal"
-                                class="w-full border rounded px-3 py-2" oninput="formatRupiah(this)" />
+                                class="w-full border rounded px-3 py-2" oninput="formatRupiah(this)" placeholder="Masukkan biaya satuan" />
 
                             <label for="batas_max" class="text-sm font-medium text-gray-700 dark:text-white">Batas
                                 Maksimal</label>
                             <input type="text" name="batas_max" id="edit-maksimal"
-                                class="w-full border rounded px-3 py-2" oninput="formatRupiah(this)" />
+                                class="w-full border rounded px-3 py-2" oninput="formatRupiah(this)" placeholder="Masukkan batas maksimal" />
 
                             <label for="kegiatan"
                                 class="text-sm font-medium text-gray-700 dark:text-white">Keterangan</label>
                             <input type="text" name="keterangan" id="edit-keterangan"
-                                class="w-full border rounded px-3 py-2" />
+                                class="w-full border rounded px-3 py-2" placeholder="Masukkan keterangan" />
 
 
                             <!-- Bisa tambah field sebanyak yang kamu mau -->

@@ -57,16 +57,42 @@ class kelasController extends Controller
     }
 
     public function updateSpp(Request $request){
+   
+        $request->merge([
+            'jumlah' => preg_replace('/\D/', '', $request->jumlah),
+            'jumlah*' => preg_replace('/\D/', '', $request->jumlah),
+            'target_dpp' => preg_replace('/\D/', '', $request->target_dpp),
+            'target_dpp*' => preg_replace('/\D/', '', $request->target_dpp),
+        ]);
         $validated = $request->validate([
             'jumlah' => 'required',
-            'jumlah*' => 'required|number'
+            'jumlah*' => 'required|number',
+            'target_dpp' => 'required',
+            'target_dpp*' => 'required|number',
         ]);
 
         foreach($request->tingkatan as $index => $item)
         {
-            hargaKelas::where('id',$request->id[$index])->update(['jumlah' => $request->jumlah[$index]]);
+            if($item == '10'){
+                hargaKelas::where('id', $request->id[$index])->update([
+                    'jumlah' => $request->jumlah[$index],
+                    'target_dpp' => $request->target_dpp[$index]
+                ]);
+            }else{
+                hargaKelas::where('id',$request->id[$index])->update(['jumlah' => $request->jumlah[$index]]);
+            }
+           
         }
 
-        return redirect()->back();
+        return redirect()->back()->with([
+            'success' => 'Biaya updated successfully.',
+            'action' => 'update',
+
+        ]);;
+    }
+
+    public function alumni($inputYear){
+
+        return view('pages.kelas.alumni',compact('inputYear'));
     }
 }

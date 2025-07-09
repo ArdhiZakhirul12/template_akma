@@ -4,7 +4,7 @@
         <h1 class="text-3xl font-bold mb-2">Detail Pemasukan</h1>
         <div class="flex items-center">
             <button onclick="printDiv('struk_pembayaran')"
-                class="focus:outline-none text-white bg-green-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                class="focus:outline-none text-white bg-fuchsia-700 hover:bg-fuchsia-800 focus:ring-4 focus:ring-fuchsia-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-fuchsia-600 dark:hover:bg-fuchsia-700 dark:focus:ring-fuchsia-800">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block me-1" viewBox="0 0 20 20"
                     fill="currentColor">
                     <path
@@ -33,7 +33,7 @@
                         <h1 class="text-l font-bold mb-2">Detail Pembagian Dana</h1>
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead
-                                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                class="text-xs text-gray-700 uppercase dark:text-gray-400">
                                 <tr>
                                     <th scope="col" class="px-4 py-2 ">Kategori</th>
                                     <th class="px-9"></th>
@@ -44,11 +44,22 @@
                                 @foreach ($banks as $bank)
                                     <tr>
                                         <td
-                                            class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            class="px-4 py-2">
                                             {{ $bank->jenis }}</td>
                                         <td></td>
-                                        <td class="px-4 py-2 text-right">
-                                            {{ toRupiah($pemasukan->jumlah * ($bank->presentase / 100)) }}</td>
+                                        @if($bank->jenis == 'DPP')
+                                        <td class="px-4 py-2 text-right whitespace-nowrap dark:text-white font-bold">
+                                            {{ toRupiah($pemasukan->dpp) }}</td>
+                                        @elseif($bank->jenis == 'SPP')
+                                        <td class="px-4 py-2 text-right whitespace-nowrap dark:text-white font-bold">
+                                            {{ toRupiah($pemasukan->spp) }}</td>
+                                        @elseif($bank->jenis == 'Tabungan')
+                                        <td class="px-4 py-2 text-right whitespace-nowrap dark:text-white font-bold">
+                                            {{ toRupiah($pemasukan->tabungan) }}</td>
+                                        @else
+                                        <td class="px-4 py-2 text-right whitespace-nowrap dark:text-white font-bold">
+                                            {{ toRupiah($pemasukan->mahad) }}</td>
+                                        @endif
                                     </tr>
                                 @endforeach
 
@@ -65,9 +76,9 @@
                 <div class="flex items-start">
                     <img src="{{ asset('images/saldoakhir.svg') }}" alt="Saldo Akhir" class="w-7 object-cover mr-2">
                     <div>
-                        <h1 class="text-l font-bold mb-2">Total</h1>
-                        <p class="text-l text-gray-500 dark:text-gray-400">Rp.
-                            {{ number_format($pemasukan->jumlah, 0, ',', '.') }}</p>
+                        <h1 class="text-l font-bold mb-4">Total</h1>
+                        <p class="text-xl font-bold whitespace-nowrap dark:text-white">Rp.
+                            {{ number_format($totalBayar, 0, ',', '.') }}</p>
                     </div>
                 </div>
 
@@ -84,27 +95,27 @@
                         <table>
                             <tbody>
                                 <tr>
-                                    <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    <td class="px-4 py-2 text-gray-700 dark:text-gray-400">
                                         Nama</td>
-                                    <td class="px-4 py-2 text-gray-500 dark:text-gray-400">{{ $pemasukan->siswa->nama }}
+                                    <td class="px-4 py-2 font-bold">{{ $pemasukan->siswa->nama }}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">No
+                                    <td class="px-4 py-2 text-gray-700 dark:text-gray-400">No
                                         Hp</td>
-                                    <td class="px-4 py-2 text-gray-500 dark:text-gray-400">
+                                    <td class="px-4 py-2 font-bold">
                                         {{ $pemasukan->siswa->no_hp }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    <td class="px-4 py-2 text-gray-700 dark:text-gray-400">
                                         NIS</td>
-                                    <td class="px-4 py-2 text-gray-500 dark:text-gray-400">{{ $pemasukan->siswa->nis }}
+                                    <td class="px-4 py-2 font-bold">{{ $pemasukan->siswa->nis }}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    <td class="px-4 py-2 text-gray-700 dark:text-gray-400">
                                         Kelas</td>
-                                    <td class="px-4 py-2 text-gray-500 dark:text-gray-400">
+                                    <td class="px-4 py-2 font-bold">
                                         {{ $pemasukan->siswa->kelas->tingkatan }} {{ $pemasukan->siswa->kelas->kelas }}
                                     </td>
                                 </tr>
@@ -118,15 +129,15 @@
                 <table>
                     <tbody>
                         <tr>
-                            <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <td class="px-4 py-2  text-gray-700 dark:text-gray-400">
                                 Pembayaran Ke</td>
-                            <td class="px-4 py-2 text-gray-500 dark:text-gray-400">
+                            <td class="px-4 py-2 font-bold">
                                 {{ $pemasukan->pembayaranKe }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <td class="px-4 py-2 text-gray-700 dark:text-gray-400 ">
                                 Tanggal</td>
-                            <td class="px-4 py-2 text-gray-500 dark:text-gray-400">
+                            <td class="px-4 py-2 font-bold">
                                 {{ \Carbon\Carbon::parse($pemasukan->pembayaran_bulan)->translatedFormat('M Y') }}</td>
                         </tr>
                     </tbody>
@@ -255,27 +266,58 @@
                         <input class="hidden" name="siswa_id" id="siswa_id" wire:model="siswaId">
                     </div>
 
-                    <div class="mb-4">
-                        <label for="jumlah" class="block text-sm font-medium text-gray-400">Jumlah</label>
-                        <input type="text" name="jumlah" id="jumlah"
-                            class="mt-1 p-2 w-full border border-gray-300 rounded"
-                            value="{{ number_format($pemasukan->jumlah, 0, ',', '.') }}" oninput="formatRupiah(this)"
-                            required>
+                    <div class="flex w-full">
+                        <div class="mb-4 w-1/2">
+                            <label for="spp" class="block text-sm font-medium text-gray-400">SPP</label>
+                            <input type="text" name="spp" id="spp" value="{{ toRupiah($pemasukan->spp) }}"
+                                class="mt-1 p-2 w-full border border-gray-300 rounded" oninput="formatRupiah(this)">
+                        </div>
+    
+                        <div class="mb-4 ms-4 w-1/2">
+                            <label for="tabungan" class="block text-sm font-medium text-gray-400">Tabungan</label>
+                            <input type="text" name="tabungan" id="tabungan" value="{{ toRupiah($pemasukan->tabungan) }}"
+                                class="mt-1 p-2 w-full border border-gray-300 rounded" oninput="formatRupiah(this)">
+                        </div>
                     </div>
-                    <div class="mb-4">
-                        <label for="pembayaranKe" class="block text-sm font-medium text-gray-400">Pembayaran
-                            Ke</label>
-                        <input type="number" name="pembayaranKe" id="pembayaranKe"
-                            class="mt-1 p-2 w-full border border-gray-300 rounded"
-                            value="{{ $pemasukan->pembayaranKe }}" required>
+
+
+                    <div class="flex w-full">
+                        <div class="mb-4 w-1/2">
+                            <label for="dpp" class="block text-sm font-medium text-gray-400">DPP</label>
+                            <input type="text" name="dpp" id="dpp" value="{{ toRupiah($pemasukan->dpp) }}"
+                                class="mt-1 p-2 w-full border border-gray-300 rounded" oninput="formatRupiah(this)">
+                        </div>
+                        <div class="mb-4 ms-4 w-1/2">
+                            <label for="mahad" class="block text-sm font-medium text-gray-400">MAHAD</label>
+                            <input type="text" name="mahad" id="mahad" value="{{ toRupiah($pemasukan->mahad) }}"
+                                class="mt-1 p-2 w-full border border-gray-300 rounded" oninput="formatRupiah(this)">
+                        </div>
                     </div>
-                    <div class="mb-4">
-                        <label for="pembayaran_bulan" class="block text-sm font-medium text-gray-400">Pembayaran
-                            Bulan</label>
-                        <input type="month" name="pembayaran_bulan" id="pembayaran_bulan"
-                            class="mt-1 p-2 w-full border border-gray-300 rounded"
-                            value="{{ \Carbon\Carbon::parse($pemasukan->pembayaran_bulan)->format('Y-m') }}" required>
+
+                    <div class="flex w-full items-center">
+                        <div class="mb-4 w-2/6">
+                            <label for="pembayaran_bulan" class="block text-sm font-medium text-gray-400">Pembayaran
+                                Bulan</label>
+                            <input type="month" name="pembayaran_bulan" id="pembayaran_bulan" value="{{  \Carbon\Carbon::parse($pemasukan->pembayaran_bulan)->format('Y-m') }}"
+                                class="mt-1 p-2 w-full border border-gray-300 rounded" required>
+                        </div>
+                       
+                        <div class="mb-4 ms-4 w-2/6">
+                            <label for="metode_pembayaran" class="block text-sm font-medium text-gray-400">Metode Bayar</label>
+                            <select name="metode_pembayaran" id="metode_pembayaran" class="mt-1 p-2 w-full border border-gray-300 rounded" required>
+                                <option value="tunai" class="dark:bg-zinc-700 text-black dark:text-white">Tunai</option>
+                                <option value="transfer" class="dark:bg-zinc-700 text-black dark:text-white">Transfer</option>
+                            </select>
+                        </div>
+                        <div class="mb-4 ms-4 w-2/6">
+                            <label for="pembayaranKe" class="block text-sm font-medium text-gray-400">Pembayaran Ke</label>
+                            <input type="number" name="pembayaranKe" id="pembayaranKe" value="{{ $pemasukan->pembayaranKe }}"
+                                class="mt-1 p-2 w-full border border-gray-300 rounded" required>
+                        </div>
                     </div>
+                   <div class="flex w-full">
+                    
+                   </div>
                     <div class="flex justify-end">
 
                         <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded">Simpan</button>

@@ -18,7 +18,7 @@
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th style="text-align: center !important">NO</th>
-                    <th>Nama Kegiatan</th>
+                    <th class="dt-orderable-none">Nama Kegiatan</th>
                     <th>Kategori</th>
                     <th>Jumlah</th>
                     <th style="text-align: center !important">Tanggal</th>
@@ -31,8 +31,12 @@
                         class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <td style="text-align: center !important">{{ $item->id }}</td>
                         <td scope="row"
-                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{ $item->uraianKegiatan->uraian_kegiatan }}</td>
+                            class="px-2 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                            style="width: 150px;">
+                            <div style="white-space: normal; font-size: smaller; text-align: center;">
+                                {{ $item->uraianKegiatan->uraian_kegiatan }}
+                            </div>
+                        </td>
 
                         {{-- <td>{{ $item->subKategoriRab->sub_kategori }}</td> --}}
                         <td>{{ $item->uraianKegiatan->subKategoriRab->kategori->kategori }}</td>
@@ -60,14 +64,20 @@
                 class="addModal fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30">
                 <div class="p-6 bg-white dark:bg-zinc-700 rounded-lg shadow-md">
                     <div class="flex justify-between items-center mb-4">
-                        <h2 class="text-xl  font-semibold mb-4">Tambah Pemasukan</h2>
+                        <h2 class="text-xl  font-semibold mb-4">Tambah Pengeluaran</h2>
                         <button onclick="closeModal()" class="text-gray-500 hover:text-gray-100 text-xl">&times;</button>
                     </div>
                     <form action="{{ route('pengeluaran.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+
+                        <div class="mb-4 hidden">
+               
+                            <input type="text" name="user_id" id="user_id" value="{{ auth()->user()->id }}"
+                                class="mt-1 p-2 w-full border border-gray-300 rounded" required >
+                        </div>
             
-                        <div class="flex items-center w-full">
-                            <div class="mb-4 w-1/2 mr-2">
+                        
+                            <div class="mb-4 ">
                                 <label for="kategori" class="block text-sm font-medium text-gray-400">Kategori</label>
                                 <select wire:model.live="selectedKategori" class="mt-1 p-2 w-full border border-gray-300 rounded">
                                     <option  class="bg-white dark:bg-zinc-700 text-black dark:text-white" value="" selected>Pilih Kategori</option>
@@ -81,7 +91,7 @@
                             </div>
                            
                             {{-- @if (!is_null($selectedKategori)) --}}
-                                <div class="mb-4 w-1/2">
+                                <div class="mb-4">
                                     <label for="sub_kategori" class="block text-sm font-medium text-gray-400">Sub Kategori</label>
                                     <select wire:model.live="selectedSubKategori" class="mt-1 p-2 w-full border border-gray-300 rounded">
                                         <option class="bg-white dark:bg-zinc-700 text-black dark:text-white" value="" selected>Pilih Sub Kategori</option>
@@ -91,7 +101,7 @@
                                     </select>
                                 </div>
                             {{-- @endif --}}
-                        </div>
+                        
                         
             
                         {{-- @if (!is_null($selectedSubKategori)) --}}
@@ -116,6 +126,8 @@
                                     @endforeach
                                 </select>
                             </div>
+
+                            <input type="text" name="kategori" value="umum" class="hidden" required />
                 
                             <div class="mb-4 w-1/2">
                                 <label for="jumlah" class="block text-sm font-medium text-gray-400">Jumlah</label>
@@ -130,11 +142,17 @@
                                 <input type="text" name="keterangan" id="keterangan" placeholder="Masukkan Keterangan"
                                     class="mt-1 p-2 w-full border border-gray-300 rounded" required>
                             </div>
-                            <div class="mb-4 w-1/2">
-                                <label for="image" class="block text-sm font-medium text-gray-400">Upload Gambar</label>
-                                <input type="file" name="dokumen" id="image" accept="image/*"
-                                    class="mt-1 p-2 w-full border border-gray-300 rounded">
+                            <div class="mb-4 w-1/2 mr-2">
+                                <label for="tanggal_pengeluaran" class="block text-sm font-medium text-gray-400">Tanggal</label>
+                                <input type="date" name="tanggal_pengeluaran" id="tanggal_pengeluaran" placeholder="Masukkan tanggal"
+                                    class="mt-1 p-2 w-full border border-gray-300 rounded" required>
                             </div>
+                          
+                        </div>
+                        <div class="mb-4 w-1/2">
+                            <label for="image" class="block text-sm font-medium text-gray-400">Upload Gambar</label>
+                            <input type="file" name="dokumen" id="image" accept="image/*"
+                                class="mt-1 p-2 w-full border border-gray-300 rounded">
                         </div>
                         
             

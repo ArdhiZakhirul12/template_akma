@@ -26,50 +26,44 @@
 
                         <tr>
                             <td scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">Nama
+                                class="px-6 py-4 text-gray-500 dark:text-gray-400">Nama
                                 Kegiatan</td>
-                            <td class="text-l text-gray-500 dark:text-gray-400">{{ $uraian->uraian_kegiatan }} </td>
-
+                            <td class="text-l text-gray-900 dark:text-white">{{ $uraian->uraian_kegiatan }} </td>
                         </tr>
 
                         <tr>
                             <td scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">Volume
+                                class="px-6 py-4 text-gray-500 dark:text-gray-400">Volume
                             </td>
-                            <td class="text-l text-gray-500 dark:text-gray-400">{{ $uraian->volume }} </td>
-
+                            <td class="text-l text-gray-900 dark:text-white">{{ $uraian->volume }} </td>
                         </tr>
 
                         <tr>
                             <td scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">Satuan
+                                class="px-6 py-4 text-gray-500 dark:text-gray-400">Satuan
                             </td>
-                            <td class="text-l text-gray-500 dark:text-gray-400">{{ $uraian->satuan }}</td>
-
+                            <td class="text-l text-gray-900 dark:text-white">{{ $uraian->satuan }}</td>
                         </tr>
 
                         <tr>
                             <td scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">Biaya
+                                class="px-6 py-4 text-gray-500 dark:text-gray-400">Biaya
                                 Satuan</td>
-                            <td class="text-l text-gray-500 dark:text-gray-400">{{ toRupiah($uraian->biaya_satuan) }} </td>
-
+                            <td class="text-l text-gray-900 dark:text-white">{{ toRupiah($uraian->biaya_satuan) }} </td>
                         </tr>
 
                         <tr>
                             <td scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">Batas
+                                class="px-6 py-4 text-gray-500 dark:text-gray-400">Batas
                                 Maksimal</td>
-                            <td class="text-l text-gray-500 dark:text-gray-400">{{ toRupiah($uraian->batas_max) }} </td>
-
+                            <td class="text-l text-gray-900 dark:text-white">{{ toRupiah($uraian->batas_max) }} </td>
                         </tr>
 
                         <tr>
                             <td scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">Keterangan
+                                class="px-6 py-4 text-gray-500 dark:text-gray-400">Keterangan
                             </td>
-
-                            <td class="text-l text-gray-500 dark:text-gray-400">{{ $uraian->keterangan }} </td>
+                            <td class="text-l text-gray-900 dark:text-white">{{ $uraian->keterangan }} </td>
                         </tr>
                     </tbody>
                 </table>
@@ -85,16 +79,16 @@
                 <tbody>
                     <tr>
                     <td scope="row"
-                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">Kelompok
+                        class="px-6 py-4 text-gray-500 dark:text-gray-400">Kelompok
                         Pengeluaran</td>
-                    <td class="text-l text-gray-500 dark:text-gray-400">
+                    <td class="text-l font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         {{ $uraian->subKategoriRab->sub_kategori }} </td>
                     </tr>
                     <tr>
                     <td scope="row"
-                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">Kategori
+                        class="px-6 py-4 text-gray-500 dark:text-gray-400">Kategori
                     </td>
-                    <td class="text-l text-gray-500 dark:text-gray-400">
+                    <td class="text-l font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         {{ $uraian->subKategoriRab->kategori->kategori }} </td>
                     </tr>
                 </tbody>

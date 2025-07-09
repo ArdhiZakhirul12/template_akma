@@ -13,4 +13,7 @@ class pemasukan extends Model
     {
         return $this->belongsTo(siswa::class);
     }
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

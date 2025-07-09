@@ -14,6 +14,7 @@ class Siswa extends Component
     public $jenis_kelas;
     public $selectedkelas;
     public $openModal;
+    public $openModalTemplate;
     public $showNextGradeModal = false;
 
     public function mount()
@@ -23,6 +24,7 @@ class Siswa extends Component
         $this->jenis_kelas = [];
         $this->selectedkelas = '';
         $this->openModal = false;
+        $this->openModalTemplate = false;
     }
 
     public function updatedSelectedKelas($value)
@@ -33,6 +35,11 @@ class Siswa extends Component
     public function openedModalForm()
     {
         $this->openModal = true;
+    }
+
+    public function openedModalTemplate()
+    {
+        $this->openModalTemplate = true;
     }
 
     public function nextGrade()

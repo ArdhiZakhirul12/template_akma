@@ -15,5 +15,7 @@ new class extends Component {
             <flux:radio value="dark" icon="moon">{{ __('Dark') }}</flux:radio>
             <flux:radio value="system" icon="computer-desktop">{{ __('System') }}</flux:radio>
         </flux:radio.group>
+       
+      
     </x-settings.layout>
 </section>

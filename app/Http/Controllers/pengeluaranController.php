@@ -14,11 +14,11 @@ class pengeluaranController extends Controller
     //
     public function index(){
         // $pengeluarans = uraianKegiatan::with('subKategoriRab.kategori')->get();
-        // $pengeluarans = pengeluaran::with('uraianKegiatan.subKategoriRab.kategori','bank')->get();
+        $pengeluarans = pengeluaran::with('uraianKegiatan.subKategoriRab.kategori','bank')->get();
         // $subKategoriRabs= subKategoriRab::all();
         // dd($subKategoriRabs);
         // dd($pengeluarans);
-        return view('pages.pengeluaran.index');
+        return view('pages.pengeluaran.index', compact('pengeluarans'));
     }
 
     public function show($id){
@@ -43,9 +43,12 @@ class pengeluaranController extends Controller
                 'jumlah' => preg_replace('/\D/', '', $request->jumlah),
             ]);
             $validated = $request->validate([
+                'user_id' => 'required',
                 'uraian_kegiatan_id' => 'required',
+                'kategori' => 'required',
                 'jenis_id' => 'required',
                 'dokumen' => 'required|image|max:2048',
+                'tanggal_pengeluaran' => 'required|date',
                 'jumlah' => 'required',
                 'keterangan' => 'nullable',
             ]);
@@ -61,7 +64,7 @@ class pengeluaranController extends Controller
             // dd($validated);
     
         } catch (ValidationException $e) {
-            dd($e->errors()); // This will show you what failed in validation
+            
         }
         pengeluaran::create($validated);
         return redirect()->route('pengeluaran.index')->with([
@@ -84,6 +87,7 @@ class pengeluaranController extends Controller
                 'jenis_id' => 'required',
                 'dokumen' => 'nullable|image|max:2048',
                 'jumlah' => 'required',
+                'tanggal_pengeluaran' => 'required',
                 'keterangan' => 'nullable',
             ]);
 
@@ -102,7 +106,7 @@ class pengeluaranController extends Controller
             // dd($validated);
     
         } catch (ValidationException $e) {
-            dd($e->errors()); // This will show you what failed in validation
+           
         }
         $pengeluaran->update($validated);
         return redirect()->route('pengeluaran.show',$id)->with([

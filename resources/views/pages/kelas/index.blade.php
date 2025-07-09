@@ -1,29 +1,41 @@
 <x-layouts.app :title="__('Kelas')">
-   
-    @if (session('success'))
-   
-      <x-template.success-alert title="Kelas"/>
-      <script>
-       
-        setTimeout(() => {
-            document.getElementById('successAlert').style.display = 'none';
-        }, 3000);
-    </script>
+
+    @if (session('success') && session('success') == 'Kelas created successfully.')
+        <x-template.success-alert title="Kelas" />
+        <script>
+            setTimeout(() => {
+                document.getElementById('successAlert').style.display = 'none';
+            }, 3000);
+        </script>
+    @elseif (session('success') && session('success') == 'Biaya updated successfully.')
+        <x-template.success-alert title="Biaya" />
+        <script>
+            setTimeout(() => {
+                document.getElementById('successAlert').style.display = 'none';
+            }, 3000);
+        </script>
     @endif
     <div class="sm:flex sm:justify-between sm:items-center mb-8">
-        <h1 class="text-3xl font-bold mb-2">Kelas</h1>
-    <div>
-     <button onclick="document.getElementById('edit-harga-modal').classList.remove('hidden')"
-     class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 cursor-pointer">
-     SPP Kelas</button>
-    <button onclick="document.getElementById('add-kelas-modal').classList.remove('hidden')"
-     class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 cursor-pointer">
-     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-5 inline-block me-1" viewBox="0 0 20 20"
-         fill="currentColor">
-         <path d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" />
-     </svg>
-     Kelas Baru</button>
-       </div>
+        <div class="flex items-center">
+            <h1 class="text-3xl font-bold mb-2 mr-2">Kelas</h1>
+           
+        </div>
+        <div>
+
+            <a href="{{ route('kelas.alumni', ['inputYear' => now()->year]) }}"
+                class="focus:outline-none text-white bg-cyan-700 hover:bg-cyan-800 focus:ring-4 focus:ring-cyan-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800 cursor-pointer">
+                Alumni</a>
+            <button onclick="document.getElementById('edit-harga-modal').classList.remove('hidden')"
+                class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 cursor-pointer">
+                Biaya</button>
+            <button onclick="document.getElementById('add-kelas-modal').classList.remove('hidden')"
+                class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-5 inline-block me-1" viewBox="0 0 20 20"
+                    fill="currentColor">
+                    <path d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" />
+                </svg>
+                Kelas Baru</button>
+        </div>
     </div>
 
     <div class="p-5 bg-white dark:bg-zinc-700 rounded-lg shadow-md">
@@ -112,28 +124,61 @@
         class="addModal hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30"
         onclick="if (event.target === this) this.classList.add('hidden')">
         <div class="bg-white dark:bg-zinc-700 rounded-lg p-10 rounded-lg shadow-lg w-full max-w-xl">
-            <h2 class="text-xl  font-semibold mb-4">Harga SPP Pertingkat</h2>
+            <h2 class="text-xl  font-semibold mb-4">Biaya Pertingkat</h2>
             <form action="{{ route('kelas.updateSpp1') }}" method="POST">
                 @csrf
                 @method('PUT')
                 @foreach ($hargas as $index => $item)
                     <div class="flex w-full mb-4 space-x-4">
                         <div class="w-1/2">
-                            <label class="block text-sm font-medium text-gray-600">Tingkatan</label>
+                            <label class="block text-sm font-medium text-gray-600 dark:text-gray-400">Tingkatan</label>
                             <input type="text" name="tingkatan[{{ $index }}]" readonly
                                 value="{{ $item->tingkatan }}" class="mt-1 p-2 w-full border border-gray-300 rounded"
                                 required>
                             <input type="hidden" name="id[{{ $index }}]" value="{{ $item->id }}">
                         </div>
                         <div class="w-1/2">
-                            <label class="block text-sm font-medium text-gray-600">SPP</label>
+                            @if ($item->tingkatan == 'Semua Tingkat')
+                                <label class="block text-sm font-medium text-gray-600 dark:text-gray-400">Mahad</label>
+                            @else
+                                <label class="block text-sm font-medium text-gray-600 dark:text-gray-400">SPP &
+                                    Tabungan</label>
+                            @endif
                             <input type="text" name="jumlah[{{ $index }}]"
-                                value="{{  number_format(old('spp.' . $index, $item->jumlah ?? ''), 0, ',', '.')  }}" required oninput="formatRupiah(this)"
+                                value="{{ number_format(old('spp.' . $index, $item->jumlah ?? ''), 0, ',', '.') }}"
+                                required oninput="formatRupiah(this)"
                                 class="mt-1 p-2 w-full border border-gray-300 rounded" required min="0"
                                 step="1">
                         </div>
                     </div>
                 @endforeach
+                @foreach ($hargas as $index => $item)
+                    @if ($item->tingkatan == '10')
+                        <div class="flex w-full mb-4 space-x-4">
+                            <div class="w-1/2">
+                                <label
+                                    class="block text-sm font-medium text-gray-600 dark:text-gray-400">Tingkatan</label>
+                                <input type="text" name="tingkatan[{{ $index }}]" readonly
+                                    value="{{ $item->tingkatan }}"
+                                    class="mt-1 p-2 w-full border border-gray-300 rounded" required>
+                                <input type="hidden" name="id[{{ $index }}]" value="{{ $item->id }}">
+                            </div>
+                            <div class="w-1/2">
+
+
+                                <label class="block text-sm font-medium text-gray-600 dark:text-gray-400">DPP
+                                    Siswa</label>
+
+                                <input type="text" name="target_dpp[{{ $index }}]"
+                                    value="{{ number_format(old('spp.' . $index, $item->target_dpp ?? ''), 0, ',', '.') }}"
+                                    required oninput="formatRupiah(this)"
+                                    class="mt-1 p-2 w-full border border-gray-300 rounded" required min="0"
+                                    step="1">
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
+
                 <div class="flex justify-end">
                     <button type="button" class="px-4 py-2 bg-gray-500 text-white rounded mr-2"
                         onclick="document.getElementById('edit-harga-modal').classList.add('hidden')">Kembali</button>
@@ -181,18 +226,18 @@
     </div>
 
     <script>
-         function formatRupiah(angka) {
+        function formatRupiah(angka) {
             value = angka.value.replace(/\D/g, "");
 
             if (value === "") {
                 angka.value = "";
                 return "";
             }
-            
+
 
             let reverse = value.split('').reverse().join('');
             let formatted = reverse.match(/\d{1,3}/g).join('.').split('').reverse().join('');
-     
+
             angka.value = formatted;
         }
         $(document).on('click', '.btn-edit', function() {
@@ -203,6 +248,5 @@
             $('#edit-kelas-modal').removeClass('hidden');
             $('#editForm').attr('action', '/kelas/' + row.data('id'));
         });
-
     </script>
 </x-layouts.app>

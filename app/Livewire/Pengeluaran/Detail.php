@@ -47,6 +47,11 @@ class Detail extends Component
         $this->openModal = true;
     }
 
+    public function closeModalForm()
+    {
+        $this->openModal = false;
+    }
+
     public function openImageSpending()
     {
         $this->openImage = true;

@@ -26,31 +26,42 @@ class CalenderPemasukan extends Component
     public $siswaId;
     public $dataPemasukan;
     public $id;
+    public $totalKurangSiswa;
+    public $jenisPemasukan;
 
-    public function mount($id)
+    public function mount($id,$jenis)
     {
+        $this->jenisPemasukan = $jenis;
         $this->selectedKelas = $id;
         $this->daftarKelas = kelas::all();
+        $pemasukanQuery = ModelsPemasukan::where('kategori',$jenis);
         // $this->pemasukans = ModelsPemasukan::with(['siswa', 'siswa.kelas'])->whereHas('siswa.kelas')->get();
         $value = $id;
         if ($value === 'all') {
-            $this->pemasukans = ModelsPemasukan::with(['siswa', 'siswa.kelas'])->whereHas('siswa.kelas')->get();
+            $this->pemasukans = $pemasukanQuery->with(['siswa', 'siswa.kelas'])->whereHas('siswa.kelas')->get();
         } else {
             // dd('tes');
-            $this->pemasukans = ModelsPemasukan::whereHas('siswa', function ($query) use ($value) {
+            $this->pemasukans = $pemasukanQuery->whereHas('siswa', function ($query) use ($value) {
                 $query->where('kelas_id', $value);
             })->with(['siswa', 'siswa.kelas'])->whereHas('siswa.kelas')->get();
         }
 
         $hargaKelas = hargaKelas::all();
         $data = [];
+        $this->totalKurangSiswa = [];
+        
 
         foreach ($this->pemasukans as $pemasukan) {
             $siswaId = $pemasukan->siswa_id;
             $kelas = $pemasukan->siswa->kelas?->tingkatan;
             $nama = $pemasukan->siswa->nama ?? 'Tanpa Nama';
             $bulan = (int)Carbon::parse($pemasukan->pembayaran_bulan)->format('n'); // 1–12
-            $harga = $hargaKelas->where('tingkatan', $kelas)->first()->jumlah;
+            if($this->jenisPemasukan == 'mahad'){
+                $harga = $hargaKelas->where('tingkatan', 'Semua Tingkat')->first()->jumlah;
+            }else{
+                $harga = $hargaKelas->where('tingkatan', $kelas)->first()->jumlah;
+            }
+            
 
             if (!isset($data[$siswaId])) {
                 $data[$siswaId] = [
@@ -59,6 +70,7 @@ class CalenderPemasukan extends Component
                     'kelas' => $kelas . $pemasukan->siswa->kelas->kelas,
                     'no_ortu' => $pemasukan->siswa->no_hp_wali,
                     'bulan' => array_fill(1, 12, []), // isi bulan 1–12 dengan array kosong
+                    'total_kurang' => 0,
                 ];
             }
             if (!isset($data[$siswaId]['bulan'][$bulan]['total'])) {
@@ -68,9 +80,11 @@ class CalenderPemasukan extends Component
                     'status' => '',
                 ];
             }
-            $jumlah = (int)$pemasukan->jumlah;
-            $data[$siswaId]['bulan'][$bulan]['bayar'][] = $jumlah;
-            $data[$siswaId]['bulan'][$bulan]['total'] += $jumlah;
+            $jumlah = $jenis == "umum" ? (int)$pemasukan->jumlah + (int)$pemasukan->spp + (int)$pemasukan->tabungan : (int)$pemasukan->mahad;
+            if(!$jumlah <= 0){
+                $data[$siswaId]['bulan'][$bulan]['bayar'][] = $jumlah;
+                $data[$siswaId]['bulan'][$bulan]['total'] += $jumlah;
+            }
             if ($data[$siswaId]['bulan'][$bulan]['total'] == $harga) {
                 $data[$siswaId]['bulan'][$bulan]['status'] = 'lunas';
             } elseif ($data[$siswaId]['bulan'][$bulan]['total'] == 0) {
@@ -78,14 +92,17 @@ class CalenderPemasukan extends Component
             } elseif ($data[$siswaId]['bulan'][$bulan]['total'] < $harga) {
                 $kurang = $harga - $data[$siswaId]['bulan'][$bulan]['total'];
                 $data[$siswaId]['bulan'][$bulan]['status'] = "kurang Rp" . number_format($kurang, 0, ',', '.') . ",-";
+                $data[$siswaId]['total_kurang'] += $kurang;
             }
         }
 
         $this->dataPemasukan = $data;
+
+        // dd($this->dataPemasukan);
     }
 
     public function updatedSelectedKelas($value) {
-        return redirect()->route('pemasukan.calender', ['id'=>$value]);
+        return redirect()->route('pemasukan.calender', ['id'=>$value,'jenis'=>$this->jenisPemasukan]);
     }
 
 

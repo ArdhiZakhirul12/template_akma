@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('kategori_rabs', function (Blueprint $table) {
             $table->id();
             $table->string('kategori');
+            $table->string('jenis_rab');
             $table->timestamps();
         });
     }

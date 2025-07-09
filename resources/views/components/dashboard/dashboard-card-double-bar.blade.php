@@ -12,7 +12,7 @@ class="bg-white dark:bg-zinc-800 relative min-h-[300px] overflow-hidden rounded-
       
         <div class="flex items-center justify-between w-full">
             
-            <h1 class="text-l font-bold">Pemasukan & Pengeluaran</h1>
+            <h1 class="text-l font-bold">{{ $title }}</h1>
      
                 <h1>{{ $year }}</h1>
             

@@ -71,12 +71,12 @@
                         <td style="background-color: #007bff; pointer-events: none;"></td>
                         <td ></td>
                     </tr>
-                   
+                   @if($monthlySums != null)
                     @foreach ($items as $item)
                         <tr>
 
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $item->uraian_kegiatan }}</td>
+                            <td style="font-size: smaller;">{{ $item->uraian_kegiatan }}</td>
                             <td>{{ toRupiah($item->batas_max) }}</td>
                             @for ($i = 1; $i <= 12; $i++)
                                 <th class="text-center font-light {{ $monthlySums[$item->id][$i] != 0 ? 'text-amber-500' : '' }}">
@@ -89,6 +89,7 @@
                             <td>{{  toRupiah($item->batas_max - $monthlyTotal[$item->id]) }}</td>
                         </tr>
                     @endforeach
+                    @endif
                 @endforeach
 
 

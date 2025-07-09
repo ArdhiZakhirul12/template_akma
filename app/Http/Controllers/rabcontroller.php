@@ -17,32 +17,28 @@ class rabcontroller extends Controller
     //
     public function index()
     {
-        $kategoris = kategoriRab::all();
+        $kategoris = kategoriRab::where('jenis_rab', 'umum')->get();
         $uraians =  uraianKegiatan::with("subKategoriRab.kategori")->get();
         $notifikasi = [];
-        foreach ($uraians as $uraian){
+        foreach ($uraians as $uraian) {
             $total =  pengeluaran::where('uraian_kegiatan_id', $uraian->id)
-                                ->whereYear('created_at', now()->year)
-                                ->sum('jumlah');
+                ->where("kategori", "umum")
+                ->whereYear('created_at', now()->year)
+                ->sum('jumlah');
             $selisih = $uraian->batas_max - $total;
             $status = "Normal";
             if ($uraian->batas_max < $total) {
                 $status = "Melebihi batas sebanyak " . toRupiah(abs($selisih));
-             
-            }
-            elseif($total == $uraian->batas_max){
+            } elseif ($total == $uraian->batas_max) {
                 $status = "Mencapai batas maksimal";
-            }
-            
-            elseif( $total >= $uraian->batas_max - ($uraian->batas_max * 0.1) ){
+            } elseif ($total >= $uraian->batas_max - ($uraian->batas_max * 0.1)) {
                 $status = "Mendekati batas maksimal";
-          
             }
             // else{
             //     dd($total,$uraian->batas_max,$selisih,$total * 0.1);
             // }
 
-            if($status != "Normal"){
+            if ($status != "Normal") {
                 $notifikasi[] = [
                     'id' => $uraian->id,
                     'uraian' => $uraian->uraian_kegiatan,
@@ -54,14 +50,13 @@ class rabcontroller extends Controller
                     'status' => $status,
                 ];
             }
-           
         }
 
         $banks = bank::all();
         $sumBank = $banks->sum('presentase');
-      
-        
-        return view('pages.rab.index', compact('kategoris','notifikasi','banks','sumBank'));
+
+
+        return view('pages.rab.index', compact('kategoris', 'notifikasi', 'banks', 'sumBank'));
     }
     public function create()
     {
@@ -71,26 +66,25 @@ class rabcontroller extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'kategori' => 'required'
+            'kategori' => 'required',
+            'jenis_rab' => 'required'
         ]);
         kategoriRab::create($validated);
         return redirect()->back()->with([
-            'success'=> 'Data saved successfully!',
+            'success' => 'Data saved successfully!',
             'action' => 'create',
         ]);
     }
     public function show(string $id)
     {
         $subs = subKategoriRab::where('kategori_rabs_id', $id)->get();
-        return view('pages.rab.show', compact('subs','id'));
-        
+        return view('pages.rab.show', compact('subs', 'id'));
     }
     public function uraianShow(string $id)
     {
-        
-        $uraians = uraianKegiatan::where('sub_kategori_id', $id)->with('pengeluaran')->get();
-        return view('pages.rab.uraian', compact('uraians','id'));
 
+        $uraians = uraianKegiatan::where('sub_kategori_id', $id)->with('pengeluaran')->get();
+        return view('pages.rab.uraian', compact('uraians', 'id'));
     }
     public function subStore(Request $request)
     {
@@ -100,7 +94,7 @@ class rabcontroller extends Controller
         ]);
         subKategoriRab::create($validated);
         return redirect()->back()->with([
-            'success'=> 'Data saved successfully!',
+            'success' => 'Data saved successfully!',
             'action' => 'create'
         ]);
     }
@@ -112,7 +106,7 @@ class rabcontroller extends Controller
                 'biaya_satuan' => preg_replace('/\D/', '', $request->biaya_satuan),
                 'batas_max' => preg_replace('/\D/', '', $request->batas_max),
             ]);
-        
+
             $validated = $request->validate([
                 'uraian_kegiatan' => 'required',
                 'keterangan' => 'required',
@@ -123,15 +117,14 @@ class rabcontroller extends Controller
                 'volume' => 'required'
             ]);
             uraianKegiatan::create($validated);
-
-        }catch (ValidationException $e) {
+        } catch (ValidationException $e) {
             dd($e->errors()); // This will show you what failed in validation
         }
 
 
-      
+
         return redirect()->back()->with([
-            'success'=> 'Data saved successfully!',
+            'success' => 'Data saved successfully!',
             'action' => 'create'
         ]);
     }
@@ -150,7 +143,6 @@ class rabcontroller extends Controller
             'success' => 'Data saved successfully!',
             'action' => 'update'
         ]);
-
     }
 
     public function updateBank(Request $request)
@@ -174,7 +166,6 @@ class rabcontroller extends Controller
                 // Jika tidak ada baris yang diupdate (misalnya ID tidak ditemukan)
                 return redirect()->back()->with('error', 'Gagal memperbarui presentase bank. ID tidak ditemukan atau tidak ada perubahan.');
             }
-
         } catch (Exception $e) {
             // Log error untuk debugging
             Log::error('Error updating bank percentage: ' . $e->getMessage(), [
@@ -192,28 +183,23 @@ class rabcontroller extends Controller
 
     public function showUraian($id)
     {
-        
+
         $uraian =  uraianKegiatan::with("subKategoriRab.kategori")->find($id);
         $total =  pengeluaran::where('uraian_kegiatan_id', $uraian->id)
-        ->whereYear('created_at', now()->year)
-        ->sum('jumlah');
+            ->whereYear('created_at', now()->year)
+            ->sum('jumlah');
         $selisih = $uraian->batas_max - $total;
         $status = "Normal";
         if ($uraian->batas_max < $total) {
             $status = "Melebihi batas sebanyak " . toRupiah(abs($selisih));
-        }
-        elseif($total == $uraian->batas_max){
+        } elseif ($total == $uraian->batas_max) {
             $status = "Mencapai batas maksimal";
-        }
-        
-        elseif( $total >= $uraian->batas_max - ($uraian->batas_max * 0.1) ){
+        } elseif ($total >= $uraian->batas_max - ($uraian->batas_max * 0.1)) {
             $status = "Mendekati batas maksimal";
-      
         }
-      
 
-        return view('pages.rab.show-uraian', compact('uraian','selisih', 'status', 'total'));
 
+        return view('pages.rab.show-uraian', compact('uraian', 'selisih', 'status', 'total'));
     }
 
 
@@ -225,7 +211,7 @@ class rabcontroller extends Controller
         ]);
         subKategoriRab::where('id', $id)->update($validated);
         return redirect()->back()->with([
-            'success'=> 'Data saved successfully!',
+            'success' => 'Data saved successfully!',
             'action' => 'update'
         ]);
     }
@@ -248,14 +234,14 @@ class rabcontroller extends Controller
         ]);
         uraianKegiatan::where('id', $id)->update($validated);
         return redirect()->back()->with([
-            'success'=> 'Data saved successfully!',
+            'success' => 'Data saved successfully!',
             'action' => 'update'
         ]);
     }
 
     public function showRekap($id)
     {
-    
+
         return view('pages.rab.show-rekap', compact('id'));
     }
 
@@ -265,5 +251,4 @@ class rabcontroller extends Controller
         // Redirect or return a response after processing
         // return redirect()->route('rab.index')->with('success', 'Data deleted successfully!');
     }
-    
 }

@@ -1,16 +1,19 @@
 <?php
 
 use App\Http\Controllers\dashboardController;
-use App\Http\Controllers\incomeController;
 use App\Http\Controllers\kelasController;
+use App\Http\Controllers\mahad\pemasukanMahadController;
+use App\Http\Controllers\mahad\pengeluaranMahadController;
+use App\Http\Controllers\mahad\rabMahadController;
 use App\Http\Controllers\pemasukanController;
 use App\Http\Controllers\pembukuanController;
 use App\Http\Controllers\pengeluaranController;
 use App\Http\Controllers\rabcontroller;
+use App\Http\Controllers\setorTunaiController;
 use App\Http\Controllers\siswaController;
 use App\Livewire\siswa\Siswa as LivewireSiswa;
 use App\Livewire\siswa\Detail as LivewireDetail;
-use App\Livewire\pemasukan\Detail as LivewirePemasukanDetail;
+use App\Livewire\Pemasukan\Detail as LivewirePemasukanDetail;
 use App\Livewire\Pengeluaran\Detail as LivewirePengeluaranDetail;
 use Illuminate\Support\Facades\Route;
 use Livewire\Livewire;
@@ -23,18 +26,24 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
-   
+
     // Route::view('dashboard', 'dashboard')->name('dashboard');
     Route::get('dashboard', [dashboardController::class, 'index'])->name('dashboard');
     Route::group(['prefix' => 'pemasukan', 'as' => 'pemasukan.'], function () {
         Route::get('/', [pemasukanController::class, 'index'])->name('index');
-        Route::get('/income', [incomeController::class, 'incomeIndex'])->name('incomeIndex');
-        Route::get('/calender/{id}', [pemasukanController::class, 'calender'])->name('calender');
+        Route::get('/calender/{id}/{jenis}', [pemasukanController::class, 'calender'])->name('calender');
         // Route::get('/create', [pemasukanController::class, 'create'])->name('create');
         Route::post('/store', [pemasukanController::class, 'store'])->name('store');
         Route::put('/{id}', [pemasukanController::class, 'update'])->name('update');
         Route::get('/{id}', [pemasukanController::class, 'show'])->name('show');
         // Route::get('/{id}', LivewirePemasukanDetail::class)->name('show');
+    });
+
+    Route::group(['prefix' => 'setor', 'as' => 'setor.'], function () {
+        Route::get('/', [setorTunaiController::class, 'index'])->name('index');
+        Route::post('/store', [setorTunaiController::class, 'store'])->name('store');
+        Route::get('/show{id}', [setorTunaiController::class, 'show'])->name('show');
+        Route::put('/{id}', [setorTunaiController::class, 'update'])->name('update');
     });
 
     Route::group(['prefix' => 'pengeluaran', 'as' => 'pengeluaran.'], function () {
@@ -47,7 +56,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 
     Route::group(['prefix' => 'rab', 'as' => 'rab.'], function () {
-        Route::group(['prefix' => 'bank', 'as' => 'bank.'], function (){
+        Route::group(['prefix' => 'bank', 'as' => 'bank.'], function () {
             Route::put('/', [rabcontroller::class, 'updateBank'])->name('update');
         });
         Route::get('/', [rabcontroller::class, 'index'])->name('index');
@@ -63,11 +72,19 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::put('kategori/uraian/edit/{id}', [rabcontroller::class, 'uraianUpdate'])->name('uraianUpdate');
     });
     Route::group(['prefix' => 'siswa', 'as' => 'pages.siswa.'], function () {
-        // Route::get('/', [siswaController::class, 'index'])->name('index');
         Route::get('/', LivewireSiswa::class)->name('index');
         Route::post('/store', [siswaController::class, 'store'])->name('store');
+        Route::post('/import', [siswaController::class, 'importSiswasData'])->name('importSiswasData');
+        Route::get('/download-excel', function () {
+            $file = public_path('downloads/data_siswa.xlsx');
+
+            if (!file_exists($file)) {
+                abort(404);
+            }
+
+            return response()->download($file, 'data_siswa.xlsx');
+        })->name('download.excel');
         Route::put('/{id}', [siswaController::class, 'update'])->name('update');
-        // Route::get('/{id}', [siswaController::class, 'show'])->name('show');
         Route::get('/{id}', LivewireDetail::class)->name('show');
     });
 
@@ -77,8 +94,25 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/store', [kelasController::class, 'store'])->name('store');
         Route::put('/{id}', [kelasController::class, 'update'])->name('update');
         Route::get('/{id}', [kelasController::class, 'siswa_kelas_list'])->name('siswa_kelas_list');
+        Route::get('/alumni/{inputYear}', [kelasController::class, 'alumni'])->name('alumni');
         // Route::put('/{id}', [kelasController::class, 'update'])->name('update');
         // Route::get('/{id}', [kelasController::class, 'show'])->name('show');
+    });
+
+    Route::group(['prefix' => 'mahad', 'as' => 'mahad.'], function () {
+        Route::group(['prefix' => 'pemasukan', 'as' => 'pemasukan.'], function () {
+            Route::get('/', [pemasukanMahadController::class, 'index'])->name('index');
+            Route::post('/store', [pemasukanMahadController::class, 'store'])->name('store');
+        });
+        Route::group(['prefix' => 'pengeluaran', 'as' => 'pengeluaran.'], function () {
+            Route::get('/', [pengeluaranMahadController::class, 'index'])->name('index');
+            Route::post('/store', [pengeluaranMahadController::class, 'store'])->name('store');
+        });
+        Route::group(['prefix' => 'rab', 'as' => 'rab.'], function () {
+            Route::get('/', [rabMahadController::class, 'index'])->name('index');
+            Route::post('/store', [rabMahadController::class, 'store'])->name('store');
+            Route::get('/rekap/{id}', [rabMahadcontroller::class, 'showRekap'])->name('showRekap');
+        });
     });
 
     Route::group(['prefix' => 'pembukuan', 'as' => 'pembukuan.'], function () {
@@ -99,6 +133,7 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/profile', 'settings.profile')->name('settings.profile');
     Volt::route('settings/password', 'settings.password')->name('settings.password');
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
+    Volt::route('settings/register-user', 'settings.register-user')->name('settings.register-user');
 });
 
 require __DIR__ . '/auth.php';

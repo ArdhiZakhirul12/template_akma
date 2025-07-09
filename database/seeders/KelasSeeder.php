@@ -29,15 +29,23 @@ class KelasSeeder extends Seeder
 
         hargaKelas::create([
             'tingkatan' => '10',
-            'jumlah' => 120000
+            'jumlah' => 120000,
+            'target_dpp' => 1000000
         ]);
         hargaKelas::create([
             'tingkatan' => '11',
-            'jumlah' => 120000
+            'jumlah' => 120000,
+            'target_dpp' => 0
         ]);
         hargaKelas::create([
             'tingkatan' => '12',
-            'jumlah' => 120000
+            'jumlah' => 120000,
+            'target_dpp' => 0
+        ]);
+        hargaKelas::create([
+            'tingkatan' => 'Semua Tingkat',
+            'jumlah' => 450000,
+            'target_dpp' => 0
         ]);
     }
 }

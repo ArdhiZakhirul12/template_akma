@@ -46,7 +46,7 @@
 
         </table>
     </div>
-    <div id="myModal" class="addModal fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div id="myModal" class="addModal fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50" onclick="if (event.target === this) closeModal()">
         <!-- Modal Content -->
         <div class="bg-white dark:bg-zinc-800 max-h-[80vh] overflow-y-auto rounded-lg p-6 w-full max-w-md">
             <div class="flex justify-between items-center mb-4">

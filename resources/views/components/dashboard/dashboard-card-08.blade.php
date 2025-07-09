@@ -43,7 +43,7 @@ class="bg-white dark:bg-zinc-800 relative min-h-[300px] overflow-hidden rounded-
     var sales = @json($exSales);
 
     var ctx = document.getElementById('{{ $chartId }}').getContext('2d');
-    var chartType = '{{ $chartId }}' === 'detail-saldo-akhir-chart' ? 'line' : 'bar';
+    var chartType =  'line';
     var myChart = new Chart(ctx, {
         type: chartType,
         data: {
@@ -52,10 +52,10 @@ class="bg-white dark:bg-zinc-800 relative min-h-[300px] overflow-hidden rounded-
                 {
                 label: 'Rp',
                 data: sales,
-                borderColor: chartType === 'bar' ? 'transparent' : 'blue',
+                borderColor: '{{ $chartId }}' === 'detail-saldo-akhir-chart' ? 'green' : 'blue',
                 borderWidth: 2,
                 fill: false,
-                backgroundColor: chartType === 'bar' ? sales.map((_, i) => `hsl(${i * 30}, 70%, 50%)`) : 'transparent'
+               backgroundColor: 'lightgreen'
             }
         ]
         },

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Pemasukan;
+namespace App\Livewire\pemasukan;
 
 use App\Models\pemasukan as ModelsPemasukan;
 use App\Models\siswa;
@@ -11,7 +11,7 @@ class Pemasukan extends Component
 
     public $data_siswas;
     public $kelas;
-    public $pemasukans_data;
+    public $pemasukans;
     public $siswas;
     public $openModal;
     public $openDropdown;
@@ -22,7 +22,7 @@ class Pemasukan extends Component
 
     public function mount()
     {
-        
+        $this->pemasukans = ModelsPemasukan::with('siswa')->where("kategori",'umum')->get();
         $this->siswas = siswa::with('kelas')->get();
         $this->data_siswas = siswa::whereHas('kelas', function ($query) {
             $query->where('tingkatan', "10");
@@ -34,14 +34,13 @@ class Pemasukan extends Component
         $this->openDropdown = false;
         $this->selectedSiswaInfo = '';
         $this->siswaId = '';
-        $this->pemasukans_data = ModelsPemasukan::with('siswa')->get();
         // $this->search = '';
         // $this->jumlah = '';
 
     }
     public function calenderPage()
     {
-        return redirect()->route('pemasukan.calender', ['id'=>'all']);
+        return redirect()->route('pemasukan.calender', ['id'=>'all','jenis'=>'umum']);
     }
     public function openedModalForm()
     {
