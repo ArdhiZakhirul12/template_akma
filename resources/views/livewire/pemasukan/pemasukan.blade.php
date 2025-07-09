@@ -255,11 +255,11 @@
     <div id="struk_pembayaran" class="hidden" style="width: 210mm; height: 297mm; margin: 0 auto;">
         <div class="flex justify-between items-center py-4 px-9 mx-5"
             style="font-family: 'Times New Roman', Times, serif;">
-            <img src="{{ asset('images/logo_warna.png') }}" alt="logo man" class="w-25 h-25">
+            <img src="{{ asset('images/akma.png') }}" alt="logo man" class="w-25 h-25">
             <div class="justify-center items-center text-align-center text-center mr-9 pr-9">
-                <h1 class="text-xl font-bold">KOMITE MADRASAH ALIYAH NEGERI TLOGO</h1>
-                <h1 class="text-xl font-bold">KECAMATAN KANIGORO KABUPATEN BLITAR</h1>
-                <h1>Jl. Raya Gaprang PO BOX 113 No. 32 Kanigoro Blitar</h1>
+                <h1 class="text-xl font-bold">KOMITE MADRASAH ALIYAH NEGERI ....</h1>
+                <h1 class="text-xl font-bold">KECAMATAN .... KABUPATEN ....</h1>
+                <h1>Jl. Raya Gaprang PO BOX 113 No. 32 .... ....</h1>
                 <h1>No. Telp (0332)804047</h1>
             </div>
         </div>
@@ -365,7 +365,7 @@
 
                         <tr>
                             <td colspan="2" class="px-4 py-2 text-center text-gray-900 dark:text-white"
-                                id="place_date">Blitar, ...
+                                id="place_date">...., ...
                                 bulan 202...</td>
 
                         </tr>
@@ -512,7 +512,7 @@
             dateStyle: 'full',
             timeStyle: 'short'
         });
-        document.getElementById('place_date').innerText = "Blitar, " + new Date().toLocaleDateString('id-ID', {
+        document.getElementById('place_date').innerText = "...., " + new Date().toLocaleDateString('id-ID', {
             day: 'numeric',
             month: 'long',
             year: 'numeric'

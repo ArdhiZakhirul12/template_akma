@@ -271,11 +271,11 @@
     <div id="struk_pembayaran" class="hidden fixed inset-0 z-50 items-center justify-center bg-black bg-opacity-50">
         <div class="flex justify-between items-center py-4"
             style="font-family: 'Times New Roman', Times, serif;">
-            <img src="{{ asset('images/logo_warna.png') }}" alt="logo man" class="w-20 h-20">
+            <img src="{{ asset('images/akma.png') }}" alt="logo man" class="w-20 h-20">
             <div class="justify-center items-center text-align-center text-center mr-9 pr-9">
-                <h1 class="text-l font-bold">KOMITE MADRASAH ALIYAH NEGERI TLOGO</h1>
-                <h1 class="text-l font-bold">KECAMATAN KANIGORO KABUPATEN BLITAR</h1>
-                <h1>Jl. Raya Gaprang PO BOX 113 No. 32 Kanigoro Blitar</h1>
+                <h1 class="text-l font-bold">KOMITE MADRASAH ALIYAH NEGERI ....</h1>
+                <h1 class="text-l font-bold">KECAMATAN .... KABUPATEN ....</h1>
+                <h1>Jl. Raya Gaprang PO BOX 113 No. 32 .... ....</h1>
                 <h1>No. Telp (0332)804047</h1>
             </div>
         </div>
@@ -294,7 +294,7 @@
                         <tr>
                             <td class="px-4 text-left text-sm">Sudah terima dari</td>
                             <td class="px-4 text-left">:</td>
-                            <td colspan="2" class="min-w-[200px] text-left px-4 font-bold text-gray-900 dark:text-white border border-gray-300" id="nama_penerima_print">KOMITE MAN 1 BLITAR</td>
+                            <td colspan="2" class="min-w-[200px] text-left px-4 font-bold text-gray-900 dark:text-white border border-gray-300" id="nama_penerima_print">KOMITE MADRASAH</td>
                         </tr>
                         <tr>
                             <td class="px-4 text-left">Jumlah Uang</td>
@@ -331,7 +331,7 @@
                     <h1 class="text-lg"></h1>
                 </div>
                 <div class="">
-                    <h1 class="">BLITAR, _______________</h1>
+                    <h1 class="">...., _______________</h1>
                     <h1 class="">Penerima</h1>
                     <div class="py-7"></div>
 

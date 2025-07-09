@@ -330,7 +330,7 @@
     
                             <tr>
                                 <td colspan="2" class="px-4 py-2 text-center text-gray-900 dark:text-white"
-                                    id="place_date">Blitar, ...
+                                    id="place_date">...., ...
                                     bulan 202...</td>
     
                             </tr>
@@ -483,7 +483,7 @@
             dateStyle: 'full',
             timeStyle: 'short'
         });
-        document.getElementById('place_date').innerText = "Blitar, " + new Date().toLocaleDateString('id-ID', {
+        document.getElementById('place_date').innerText = "...., " + new Date().toLocaleDateString('id-ID', {
             day: 'numeric',
             month: 'long',
             year: 'numeric'
