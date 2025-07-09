@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\pemasukan;
+namespace App\Livewire\Pemasukan;
 
 use Livewire\Component;
 use App\Models\bank;
